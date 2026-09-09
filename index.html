@@ -1,22 +1,42 @@
-<!doctype html><html lang="zh"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1"><title>xtheos</title>
-<style>body{font:-apple-system-body,system-ui;margin:0;padding:20px;background:#f2f2f7;color:#1c1c1e}
-h1{font-size:22px} .card{background:#fff;border-radius:14px;padding:16px;margin:14px 0;box-shadow:0 1px 3px rgba(0,0,0,.08)}
-.card h2{font-size:17px;margin:0 0 4px} .card p{margin:0 0 12px;color:#636366;font-size:14px}
-a.btn{display:inline-block;padding:9px 14px;margin:4px 6px 0 0;border-radius:9px;background:#007aff;color:#fff;text-decoration:none;font-size:15px}
-a.btn.z{background:#8e44ad} a.btn.c{background:#5c4033} .req{color:#ff3b30;font-weight:600}
-code{background:#e5e5ea;padding:2px 6px;border-radius:5px}</style></head><body>
-<h1>xtheos 源</h1>
-<p>用你的包管理器加源装 <code>com.summer.xtheos</code>(设备按架构自动选 rootful/rootless/roothide)。</p>
-<div class="card"><h2>xtheos harness <span class="req">· 必需</span></h2>
-<p>Xcode 调试/安装 harness · <code>https://repo.iospkg.cn/</code></p>
-<a class="btn" href="sileo://source/https://repo.iospkg.cn/">加入 Sileo</a>
-<a class="btn z" href="zbra://sources/add/https://repo.iospkg.cn/">加入 Zebra</a>
-<a class="btn c" href="cydia://url/https://cydia.saurik.com/api/share#?source=https://repo.iospkg.cn/">加入 Cydia</a></div>
-<div class="card"><h2>AppSync Unified · 推荐</h2>
-<p>无签名/伪签安装所需 · 官方源 <code>https://cydia.akemi.ai/</code></p>
-<a class="btn" href="sileo://source/https://cydia.akemi.ai/">加入 Sileo</a>
-<a class="btn z" href="zbra://sources/add/https://cydia.akemi.ai/">加入 Zebra</a></div>
-<div class="card"><h2>ellekit / substrate · 视环境</h2>
-<p>rootless/roothide 需 ellekit,rootful 需 substrate;通常越狱默认源已带。</p></div>
+<!doctype html>
+<html lang="zh"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>xtheos</title>
+<style>
+ :root{color-scheme:light dark} *{box-sizing:border-box}
+ body{font:16px/1.6 -apple-system,"SF Pro Text",system-ui,"PingFang SC",sans-serif;
+   max-width:680px;margin:0 auto;padding:56px 20px;color:#1d1d1f;background:#fff}
+ @media(prefers-color-scheme:dark){body{background:#000;color:#f5f5f7}}
+ h1{font-size:32px;font-weight:700;letter-spacing:-.02em;margin:0 0 6px}
+ .tagline{font-size:17px;color:#86868b;margin:0 0 36px}
+ section{border:1px solid #e3e3e8;border-radius:14px;padding:24px;margin:20px 0}
+ @media(prefers-color-scheme:dark){section{border-color:#2c2c2e}}
+ h2{font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:#86868b;margin:0 0 14px}
+ .url{font:13px ui-monospace,SFMono-Regular,monospace;color:#86868b;word-break:break-all;margin:0 0 18px}
+ a.btn{display:inline-block;padding:11px 22px;margin:0 10px 10px 0;border-radius:980px;
+   background:#0071e3;color:#fff;text-decoration:none;font-size:15px;font-weight:500}
+ a.btn.alt{background:transparent;color:#0071e3;box-shadow:inset 0 0 0 1px #0071e3}
+ p.note{font-size:14px;color:#86868b;margin:0}
+</style></head><body>
+<h1>xtheos</h1>
+<p class="tagline">用 Xcode 开发、构建、安装越狱插件的工具链。</p>
+<section>
+ <h2>添加软件源</h2>
+ <p class="url">https://repo.iospkg.cn/</p>
+ <a class="btn" href="sileo://source/https://repo.iospkg.cn/">Sileo</a>
+ <a class="btn alt" href="zbra://sources/add/https://repo.iospkg.cn/">Zebra</a>
+ <a class="btn alt" href="cydia://url/https://cydia.saurik.com/api/share#?source=https://repo.iospkg.cn/">Cydia</a>
+</section>
+<section>
+ <h2>安装</h2>
+ <p class="note">添加软件源后,在包管理器中安装 <b>xtheos</b>。软件包按设备越狱环境
+ (rootful / rootless / roothide)自动匹配对应版本。</p>
+</section>
+<section>
+ <h2>依赖</h2>
+ <p class="note">安装未签名 / 伪签名应用需要 AppSync Unified:</p>
+ <p class="url">https://cydia.akemi.ai/</p>
+ <a class="btn alt" href="sileo://source/https://cydia.akemi.ai/">Sileo</a>
+ <a class="btn alt" href="zbra://sources/add/https://cydia.akemi.ai/">Zebra</a>
+</section>
 </body></html>

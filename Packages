@@ -1,45 +1,45 @@
-Package: com.summer.xcoderun
-Version: 0.1-1
-Architecture: iphoneos-arm64
-Maintainer: Summer
-Depends: firmware (>= 5.0), ellekit
-Filename: ./com.summer.xcoderun_0.1-1_iphoneos-arm64.deb
-Size: 96660
-MD5sum: a901270b85e91ec184c57223ae791e82
-SHA1: 94385d5ac991b8dd0e77535fe8756f0f19a0f7e9
-SHA256: 147540108d2ff333a5a2ad8309e6064340ed5e71bf0b60ba452cf2bc0d37b385
-Section: System
-Description: Xcode 越狱调试 harness (xtheos vendored, rootless)
-Author: cu
-Name: XcodeRun
-
-Package: com.summer.xcoderun
+Package: com.summer.xtheos
 Version: 0.1-1
 Architecture: iphoneos-arm64e
 Maintainer: Summer
 Depends: firmware (>= 5.0), ellekit
-Filename: ./com.summer.xcoderun_0.1-1_iphoneos-arm64e.deb
-Size: 96578
-MD5sum: 010049234eef421c6906ae60c53b50d8
-SHA1: 0e7be2fcdd65cbb76ea3af51e51fcdca7d27799c
-SHA256: c0c6af005ba1682a513debe2439e5518876ea5b28e7dd29a9e0dc87659f19142
+Filename: ./com.summer.xtheos_0.1-1_iphoneos-arm64e.deb
+Size: 55368
+MD5sum: 443cf74823464fafb81b0c47827092d9
+SHA1: dd276bc85d0968bcf38bc82714c8d2666a09b868
+SHA256: 0c04afa2b00db92a25b2a678387f4ec64ef65e1a7038a3ed8478709b896a4e4f
 Section: System
 Description: Xcode 越狱调试 harness (xtheos vendored, roothide)
 Author: cu
-Name: XcodeRun
+Name: xtheos
 
-Package: com.summer.xcoderun
+Package: com.summer.xtheos
 Version: 0.1-1
 Architecture: iphoneos-arm
 Maintainer: Summer
 Depends: firmware (>= 5.0), mobilesubstrate
-Filename: ./com.summer.XcodeRun_0.1-1_iphoneos-arm.deb
-Size: 96542
-MD5sum: 34d7235099068ebb366211bd49994919
-SHA1: 2d5c94d3692babf54395db3770fd5e3fdf4ab79c
-SHA256: 514b5c490b472e27f9adf5608afbea265ba2cac3f1f0ffac0ae1319346a7e1f6
+Filename: ./com.summer.xtheos_0.1-1_iphoneos-arm.deb
+Size: 55392
+MD5sum: 10d0b77a4fe632d5abe17d0678eaf9a7
+SHA1: 7f8d00b6c50e23e53cacd51fd479f10022801878
+SHA256: 165dbc8e6d18860a9c5e3ef51f875f512be00e2ba3a1ae5fbd31cf7b9280ca7c
 Section: System
 Description: Xcode 越狱调试 harness (xtheos vendored, rootful)
 Author: cu
-Name: XcodeRun
+Name: xtheos
+
+Package: com.summer.xtheos
+Version: 0.1-1
+Architecture: iphoneos-arm64
+Maintainer: Summer
+Depends: firmware (>= 5.0), ellekit
+Filename: ./com.summer.xtheos_0.1-1_iphoneos-arm64.deb
+Size: 55380
+MD5sum: ad3a7ab33872867d3419f87d72f858b8
+SHA1: d89ee92acbb773af988c4220772f8a61474a320d
+SHA256: 15bcc41d16c7289ad69d2c3835cdf7706e10cbdaf013083e3322b140f5c0960b
+Section: System
+Description: Xcode 越狱调试 harness (xtheos vendored, rootless)
+Author: cu
+Name: xtheos
 
