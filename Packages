@@ -1,52 +1,52 @@
 Package: com.summer.xtheos
-Version: 0.8.4
-Architecture: iphoneos-arm64
-Maintainer: cu
-Installed-Size: 12716
-Depends: mobilesubstrate
-Conflicts: com.summer.xcoderun
-Replaces: com.summer.xcoderun
-Filename: ./com.summer.xtheos_0.8.4_iphoneos-arm64.deb
-Size: 610766
-MD5sum: e5e28fab9a780335604ebd86688f24a6
-SHA1: 4201352482743ddef5981abd52991c60fed71b4a
-SHA256: 108357bb9a947c77b3f1d58f1957a998107e73408e587784bf73a2f9a8e5ecd6
-Section: Development
-Description: Xcode 越狱调试 harness —— hook 插件(xtheos)+ 守护进程(xtheosd)
-Author: cu
-Name: xtheos
-
-Package: com.summer.xtheos
-Version: 0.8.4
-Architecture: iphoneos-arm64e
-Maintainer: cu
-Installed-Size: 12716
-Depends: mobilesubstrate
-Conflicts: com.summer.xcoderun
-Replaces: com.summer.xcoderun
-Filename: ./com.summer.xtheos_0.8.4_iphoneos-arm64e.deb
-Size: 611426
-MD5sum: 6b8aad8218a6d3bfbbe442088a733a3b
-SHA1: 9d96f349ec463bebf8947d4e72932842380ad1b5
-SHA256: 34708cc3d6d5b2f1412531aa7f53b7c9617ad82a7db475f484ca8caf5d715826
-Section: Development
-Description: Xcode 越狱调试 harness —— hook 插件(xtheos)+ 守护进程(xtheosd)
-Author: cu
-Name: xtheos
-
-Package: com.summer.xtheos
-Version: 0.8.4
+Version: 0.8.5
 Architecture: iphoneos-arm
 Maintainer: cu
 Installed-Size: 12716
 Depends: mobilesubstrate
 Conflicts: com.summer.xcoderun
 Replaces: com.summer.xcoderun
-Filename: ./com.summer.xtheos_0.8.4_iphoneos-arm.deb
-Size: 611750
-MD5sum: 532a621e7c0135f4f5071ed1bf1f2977
-SHA1: 58ec6d8d8b6455ce209dcbf1d61fbd728e22e8bc
-SHA256: 248f117e43d71f06bb39645527ef2ddb990c0426dfcff4e182dacd15ab22c8bb
+Filename: ./com.summer.xtheos_0.8.5_iphoneos-arm.deb
+Size: 611122
+MD5sum: ce700470b36bbbd94f4656ed440a407c
+SHA1: 19ec10a20f39be1a51c381def27e23a419fe44f9
+SHA256: 73658b0eed78d08e1a49a9e198fe2d4edc1750af6f586752f5b3846fa5603cc9
+Section: Development
+Description: Xcode 越狱调试 harness —— hook 插件(xtheos)+ 守护进程(xtheosd)
+Author: cu
+Name: xtheos
+
+Package: com.summer.xtheos
+Version: 0.8.5
+Architecture: iphoneos-arm64e
+Maintainer: cu
+Installed-Size: 12716
+Depends: mobilesubstrate
+Conflicts: com.summer.xcoderun
+Replaces: com.summer.xcoderun
+Filename: ./com.summer.xtheos_0.8.5_iphoneos-arm64e.deb
+Size: 611522
+MD5sum: 6e3d30c340bb3e9ac7689b3cad531fb1
+SHA1: 45ec1e10665c56409b756f25976ec047900c148e
+SHA256: cee5def412ec8aa177e91afe44827813837c0b0b2ecaf677260131825c2a0fe1
+Section: Development
+Description: Xcode 越狱调试 harness —— hook 插件(xtheos)+ 守护进程(xtheosd)
+Author: cu
+Name: xtheos
+
+Package: com.summer.xtheos
+Version: 0.8.5
+Architecture: iphoneos-arm64
+Maintainer: cu
+Installed-Size: 12716
+Depends: mobilesubstrate
+Conflicts: com.summer.xcoderun
+Replaces: com.summer.xcoderun
+Filename: ./com.summer.xtheos_0.8.5_iphoneos-arm64.deb
+Size: 611160
+MD5sum: 122d9032a7b97804a3d44cd43b15e2bb
+SHA1: 4b1a450687934ab886fd874017fd6f93576f931f
+SHA256: 117bec46a295a17dd6b3f6910a6b4ede1775ab45e4c4491877c5d4901280ab05
 Section: Development
 Description: Xcode 越狱调试 harness —— hook 插件(xtheos)+ 守护进程(xtheosd)
 Author: cu
