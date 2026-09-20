@@ -2,13 +2,13 @@ Origin: xtheos
 Label: xtheos
 Suite: stable
 Version: 1.0
-Date: Sun, 20 Sep 2026 07:17:08 +0000
+Date: Sun, 20 Sep 2026 07:34:35 +0000
 Architectures: iphoneos-arm iphoneos-arm64 iphoneos-arm64e
 Components: main
 Description: xtheos harness 源(com.summer.xtheos)
 MD5Sum:
  a0d73f634a6fac1a78f42de0bc4c6667 5043 Packages
- 920aae8100bbf4507e022d12c15c5cb7 1253 Packages.gz
+ 25b0e3e48fe63999f9362c5f901131ae 1253 Packages.gz
 SHA256:
  f16fca9c8e29467ff4dd0add47990b14df93c06d24a9de36ab3b9c71a751e592 5043 Packages
- bd10f6f36e8dfb92b4dfc2b3fea63bbcf6e808adde52fd969de76f8c82a57216 1253 Packages.gz
+ 0691c76cb0e11cc1dc0cd516b740e5a070ec967c0ddb9a4602acc3f00a31ca7f 1253 Packages.gz
