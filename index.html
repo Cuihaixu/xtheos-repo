@@ -17,9 +17,19 @@
    background:#0071e3;color:#fff;text-decoration:none;font-size:15px;font-weight:500}
  a.btn.alt{background:transparent;color:#0071e3;box-shadow:inset 0 0 0 1px #0071e3}
  p.note{font-size:14px;color:#86868b;margin:0}
+ .cmd{display:flex;align-items:center;gap:10px;background:#f5f5f7;border-radius:10px;padding:12px 14px;margin-top:4px}
+ @media(prefers-color-scheme:dark){.cmd{background:#1c1c1e}}
+ .cmd code{flex:1;font:13px ui-monospace,SFMono-Regular,monospace;word-break:break-all;color:inherit}
+ .copy{flex:none;border:0;border-radius:980px;background:#0071e3;color:#fff;font-size:13px;padding:7px 16px;cursor:pointer}
 </style></head><body>
 <h1>xtheos</h1>
 <p class="tagline">用 Xcode 开发、构建、安装越狱插件的工具链。</p>
+<section>
+ <h2>Mac 工具链安装</h2>
+ <p class="note">Mac 终端执行一行安装(需 Xcode 14+ 与 git;私有源需对仓库有读权限、已 <code>gh auth login</code>):</p>
+ <div class="cmd"><code id="installcmd">bash -c "$(curl -fsSL https://repo.iospkg.cn/install.sh)"</code><button class="copy" onclick="cpcmd(this)">复制</button></div>
+ <p class="note" style="margin-top:12px">装到 <code>~/xtheos</code>;之后 <code>xtheos update</code> 更新、<code>xtheos uninstall</code> 卸载。</p>
+</section>
 <section>
  <h2>添加软件源</h2>
  <p class="url">https://repo.iospkg.cn</p>
@@ -50,4 +60,11 @@
  几乎所有越狱的默认源已内置(roothide.github.io / repo.palera.in / Procursus 等),
  正常无需加源;若包管理器里搜不到,到你越狱自带的默认源里找。</p>
 </section>
+<script>
+function cpcmd(b){var t=document.getElementById('installcmd').textContent;
+ var done=function(){var o=b.textContent;b.textContent='已复制';setTimeout(function(){b.textContent=o},1200);};
+ if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(done,done);}
+ else{var r=document.createRange();r.selectNode(document.getElementById('installcmd'));
+  var s=getSelection();s.removeAllRanges();s.addRange(r);try{document.execCommand('copy')}catch(e){}s.removeAllRanges();done();}}
+</script>
 </body></html>
