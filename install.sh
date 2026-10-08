@@ -2,7 +2,7 @@
 # xtheos 引导安装脚本 —— 首次部署用。之后更新/卸载走 `xtheos update` / `xtheos uninstall`。
 #   bash -c "$(curl -fsSL https://repo.iospkg.cn/install.sh)"
 #
-# 做的事:环境自检 → git clone 私有仓库的「用户子集」到 ~/xtheos(sparse)→ 切最新发布 tag → xtheos setup。
+# 做的事:环境自检 → git clone 私有仓库的「用户子集」到 ~/xtheos(sparse)→ 切最新发布 tag → xtheos setup + skills install。
 # 本脚本公开,但代码私有:git clone 用你机器已配的 git 凭证(gh auth / ssh / keychain),没权限会明确提示。
 # 自定义目录:装前 `export XTHEOS=/your/path`。
 set -euo pipefail
@@ -48,6 +48,8 @@ say "版本:${LATEST:-main}"
 # ── 3. setup(建软链 + PATH/lldb 注入)────────────────────────
 say "跑 xtheos setup…"
 "$ROOT/bin/xtheos" setup || true
+say "装 AI skills…"
+"$ROOT/bin/xtheos" skills install || true
 
 # ── 4. 旧 brew 安装 / 残留提示(不自动动用户的包管理器与配置)──
 if command -v brew >/dev/null 2>&1 && brew list --versions xtheos >/dev/null 2>&1; then
@@ -57,4 +59,7 @@ if grep -qs 'HOMEBREW_GITHUB_API_TOKEN' "$HOME/.zshrc" 2>/dev/null; then
     printf '\033[1;33m提示:\033[0m ~/.zshrc 里旧的 HOMEBREW_GITHUB_API_TOKEN 已不需要,可手动删掉那行。\n'
 fi
 
-say "完成。新开终端即可用 \`xtheos\`;AI skills 另跑 \`xtheos skills install\`。"
+case ":$PATH:" in
+    *":$HOME/.local/bin:"*) say "完成。\`xtheos\` 命令当前终端即可用。" ;;
+    *) say "完成。当前终端先 \`exec zsh\`(或新开终端)让 \`xtheos\` 命令生效。" ;;
+esac
