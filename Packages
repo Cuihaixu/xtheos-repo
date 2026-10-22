@@ -214,3 +214,57 @@ Description: Xcode 越狱调试 harness —— hook 插件(xtheos)+ 守护进程
 Author: cu
 Name: xtheos
 
+Package: com.summer.xtheos
+Version: 0.8.17
+Architecture: iphoneos-arm64
+Maintainer: cu
+Installed-Size: 12752
+Depends: mobilesubstrate
+Conflicts: com.summer.xcoderun
+Replaces: com.summer.xcoderun
+Filename: ./com.summer.xtheos_0.8.17_iphoneos-arm64.deb
+Size: 622068
+MD5sum: 018ad9d7d8a3220a43197a54af97cc6b
+SHA1: b72cd2042ea31784882c9f657f3e5f35f3503691
+SHA256: 0294eb4d9de1b566d0076d404df45613c712ba557bac2bc6b48aaeb04010af73
+Section: Development
+Description: Xcode 越狱调试 harness —— hook 插件(xtheos)+ 守护进程(xtheosd)
+Author: cu
+Name: xtheos
+
+Package: com.summer.xtheos
+Version: 0.8.17
+Architecture: iphoneos-arm64e
+Maintainer: cu
+Installed-Size: 12752
+Depends: mobilesubstrate
+Conflicts: com.summer.xcoderun
+Replaces: com.summer.xcoderun
+Filename: ./com.summer.xtheos_0.8.17_iphoneos-arm64e.deb
+Size: 623538
+MD5sum: efe0333904c373851889af9152d186a2
+SHA1: 3e77d85b7ebf19fca211183b665bbcf49c759f0e
+SHA256: 4709875429221f855f5f91d90cefdb14fec98f4be0489b40698c814e573b6d4f
+Section: Development
+Description: Xcode 越狱调试 harness —— hook 插件(xtheos)+ 守护进程(xtheosd)
+Author: cu
+Name: xtheos
+
+Package: com.summer.xtheos
+Version: 0.8.17
+Architecture: iphoneos-arm
+Maintainer: cu
+Installed-Size: 12752
+Depends: mobilesubstrate
+Conflicts: com.summer.xcoderun
+Replaces: com.summer.xcoderun
+Filename: ./com.summer.xtheos_0.8.17_iphoneos-arm.deb
+Size: 621338
+MD5sum: 29407ae28a6d0e4b9e2bf62d93e3dd16
+SHA1: 2dee54d1858c4a99665fa063e6d1914ab7bac378
+SHA256: b15478bcdb6e38b444f5a1f35905f750dc85a7e69f15f1553ab30ca9fd846697
+Section: Development
+Description: Xcode 越狱调试 harness —— hook 插件(xtheos)+ 守护进程(xtheosd)
+Author: cu
+Name: xtheos
+
