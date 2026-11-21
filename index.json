@@ -4,7 +4,7 @@
   "description": "xtheos package repository",
   "keep_versions": 4,
   "hash": "b3136bd19ff7eb57287124f7a0817118215a7b5f00390c30db53b14100b36859",
-  "updated_at": "2026-11-21T08:32:43Z",
+  "updated_at": "2026-11-21T08:32:54Z",
   "packages": {
     "com.summer.conduit": {
       "id": "com.summer.conduit",
