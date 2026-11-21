@@ -1,0 +1,6 @@
+{
+  "name": "default",
+  "description": "xtheos package repository",
+  "keep_versions": 4,
+  "auto_push_dev": true
+}
