@@ -3,52 +3,89 @@
   "name": "default",
   "description": "xtheos package repository",
   "keep_versions": 4,
-  "hash": "5ac148e25dc56de93d4da907645dd6415f3c70a966a4389c0acadf9315adbb2a",
-  "updated_at": "2026-11-22T04:54:27Z",
+  "hash": "079551514115b4ff6858b5ad24790b9dc717abc62c1b7ccca2029732ef941d86",
+  "updated_at": "2026-11-22T04:58:10Z",
   "packages": {
     "com.summer.chain3": {
       "id": "com.summer.chain3",
       "name": "Chain3Multi",
-      "current_version": "0.0.1-4+6c63fa",
+      "current_version": "0.0.1-5+a45e2a",
       "base_version": "0.0.1",
-      "hash": "891f4b463b1fecde4a5490cc2305fd1a772f696a440fc46af311a7b26d9cf67f",
+      "hash": "5a0858fe2642fab509422236781c474e1592d8e871b0b45b64eb9ab250a4eea0",
       "section": "Utilities",
       "description": "A command-line tool built with xtheos",
       "author": "cu",
       "maintainer": "cu",
       "has_framework": false,
       "has_skills": false,
-      "release_notes": "# Chain3Multi 0.0.1-4+6c63fa\n\n## 新功能\n- TODO: 请填写本次新增功能（若无请写“- 无”）\n\n## 改进\n- TODO: 请填写本次优化与改进（若无请写“- 无”）\n\n## 修复\n- TODO: 请填写本次修复的问题（若无请写“- 无”）\n\n## 升级与兼容性\n- TODO: 请填写破坏性变更或最低版本要求（若无请写“- 无”）",
+      "release_notes": "# Chain3Multi 0.0.1-5+a45e2a\n\n## 新功能\n- TODO: 请填写本次新增功能（若无请写“- 无”）\n\n## 改进\n- TODO: 请填写本次优化与改进（若无请写“- 无”）\n\n## 修复\n- TODO: 请填写本次修复的问题（若无请写“- 无”）\n\n## 升级与兼容性\n- TODO: 请填写破坏性变更或最低版本要求（若无请写“- 无”）",
       "environments": {
         "rootful": {
           "arch": "iphoneos-arm",
           "depends": [
             "mobilesubstrate"
           ],
-          "deb": "debs/com.summer.chain3_0.0.1-4+6c63fa_iphoneos-arm.deb",
-          "size": 4796,
-          "sha256": "a96d471d6d247df928971de300ee541339fc4f4b80b62cadf0b058a2418db80d"
+          "deb": "debs/com.summer.chain3_0.0.1-5+a45e2a_iphoneos-arm.deb",
+          "size": 4792,
+          "sha256": "c8ef9a4731fe67f5c59c999f37ad518c683b10b0757bc94968dbea24b9a8b182"
         },
         "rootless": {
           "arch": "iphoneos-arm64",
           "depends": [
             "ellekit"
           ],
-          "deb": "debs/com.summer.chain3_0.0.1-4+6c63fa_iphoneos-arm64.deb",
-          "size": 4820,
-          "sha256": "2aad70411564ad337ce54858a9a152b0e41b99c63f8977523919b60c76c60db4"
+          "deb": "debs/com.summer.chain3_0.0.1-5+a45e2a_iphoneos-arm64.deb",
+          "size": 4818,
+          "sha256": "ac706ec6393b4fbbcea34f5390b20bc452a3fde6563ec761ecba4a2a8ef51c8a"
         },
         "roothide": {
           "arch": "iphoneos-arm64e",
           "depends": [
             "ellekit"
           ],
-          "deb": "debs/com.summer.chain3_0.0.1-4+6c63fa_iphoneos-arm64e.deb",
-          "size": 4792,
-          "sha256": "4408e968b67f6a40331981c8a295d10d772fe9286099152a036be1ec19117555"
+          "deb": "debs/com.summer.chain3_0.0.1-5+a45e2a_iphoneos-arm64e.deb",
+          "size": 4790,
+          "sha256": "959c97a28333015e7a4803a2a646a226bd675b6ee701203667a7189ebeeb6fa3"
         }
       },
       "versions": [
+        {
+          "version": "0.0.1-5+a45e2a",
+          "base_version": "0.0.1",
+          "hash": "5a0858fe2642fab509422236781c474e1592d8e871b0b45b64eb9ab250a4eea0",
+          "release_notes": "# Chain3Multi 0.0.1-5+a45e2a\n\n## 新功能\n- TODO: 请填写本次新增功能（若无请写“- 无”）\n\n## 改进\n- TODO: 请填写本次优化与改进（若无请写“- 无”）\n\n## 修复\n- TODO: 请填写本次修复的问题（若无请写“- 无”）\n\n## 升级与兼容性\n- TODO: 请填写破坏性变更或最低版本要求（若无请写“- 无”）",
+          "has_framework": false,
+          "has_skills": false,
+          "environments": {
+            "rootful": {
+              "arch": "iphoneos-arm",
+              "depends": [
+                "mobilesubstrate"
+              ],
+              "deb": "debs/com.summer.chain3_0.0.1-5+a45e2a_iphoneos-arm.deb",
+              "size": 4792,
+              "sha256": "c8ef9a4731fe67f5c59c999f37ad518c683b10b0757bc94968dbea24b9a8b182"
+            },
+            "rootless": {
+              "arch": "iphoneos-arm64",
+              "depends": [
+                "ellekit"
+              ],
+              "deb": "debs/com.summer.chain3_0.0.1-5+a45e2a_iphoneos-arm64.deb",
+              "size": 4818,
+              "sha256": "ac706ec6393b4fbbcea34f5390b20bc452a3fde6563ec761ecba4a2a8ef51c8a"
+            },
+            "roothide": {
+              "arch": "iphoneos-arm64e",
+              "depends": [
+                "ellekit"
+              ],
+              "deb": "debs/com.summer.chain3_0.0.1-5+a45e2a_iphoneos-arm64e.deb",
+              "size": 4790,
+              "sha256": "959c97a28333015e7a4803a2a646a226bd675b6ee701203667a7189ebeeb6fa3"
+            }
+          }
+        },
         {
           "version": "0.0.1-4+6c63fa",
           "base_version": "0.0.1",
