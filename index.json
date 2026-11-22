@@ -3,8 +3,8 @@
   "name": "default",
   "description": "xtheos package repository",
   "keep_versions": 4,
-  "hash": "aedc6234f614a9e277af6e875af65c008c4d6732944d0da73d6588e898dd40f6",
-  "updated_at": "2026-11-21T15:22:02Z",
+  "hash": "2759c2a585dfdcafb074dc8d70b94ee894eac6adc0d035f54a94364a5816c862",
+  "updated_at": "2026-11-22T03:15:54Z",
   "packages": {
     "com.summer.conduit": {
       "id": "com.summer.conduit",
@@ -120,6 +120,88 @@
               "deb": "debs/com.summer.conduit_0.2.3-5+542c88_iphoneos-arm64e.deb",
               "size": 281094,
               "sha256": "fa6defdbf4121d833821e582369eb2e1e561b78f3a3030023a8bb9f2fdc68957"
+            }
+          }
+        }
+      ]
+    },
+    "com.summer.disttest": {
+      "id": "com.summer.disttest",
+      "name": "DistTest",
+      "current_version": "0.0.1-2+c4c384",
+      "base_version": "0.0.1",
+      "hash": "358f102929dd2353f2bd6f765326bedfbe57fe221b9e1392b7fe8a6adbde0b3b",
+      "section": "Utilities",
+      "description": "A command-line tool built with xtheos",
+      "author": "cu",
+      "maintainer": "cu",
+      "has_framework": false,
+      "has_skills": false,
+      "release_notes": "# DistTest 0.0.1-2+c4c384\n\n## 新功能\n- TODO: 请填写本次新增功能（若无请写“- 无”）\n\n## 改进\n- TODO: 请填写本次优化与改进（若无请写“- 无”）\n\n## 修复\n- TODO: 请填写本次修复的问题（若无请写“- 无”）\n\n## 升级与兼容性\n- TODO: 请填写破坏性变更或最低版本要求（若无请写“- 无”）",
+      "environments": {
+        "rootful": {
+          "arch": "iphoneos-arm",
+          "depends": [
+            "mobilesubstrate"
+          ],
+          "deb": "debs/com.summer.disttest_0.0.1-2+c4c384_iphoneos-arm.deb",
+          "size": 4760,
+          "sha256": "16740720c0e819f58fae949720df291a1dec2ec7f8ead0e3a50dd5e226912600"
+        },
+        "rootless": {
+          "arch": "iphoneos-arm64",
+          "depends": [
+            "ellekit"
+          ],
+          "deb": "debs/com.summer.disttest_0.0.1-2+c4c384_iphoneos-arm64.deb",
+          "size": 4784,
+          "sha256": "fc381e79452624b24cf2eb0495898400ea7eb086d27eba692a3278fd949e0d66"
+        },
+        "roothide": {
+          "arch": "iphoneos-arm64e",
+          "depends": [
+            "ellekit"
+          ],
+          "deb": "debs/com.summer.disttest_0.0.1-2+c4c384_iphoneos-arm64e.deb",
+          "size": 4756,
+          "sha256": "eeb68f6f048c68cee5c777c291067ce3b72d92f98a3623a80123554a8487db33"
+        }
+      },
+      "versions": [
+        {
+          "version": "0.0.1-2+c4c384",
+          "base_version": "0.0.1",
+          "hash": "358f102929dd2353f2bd6f765326bedfbe57fe221b9e1392b7fe8a6adbde0b3b",
+          "release_notes": "# DistTest 0.0.1-2+c4c384\n\n## 新功能\n- TODO: 请填写本次新增功能（若无请写“- 无”）\n\n## 改进\n- TODO: 请填写本次优化与改进（若无请写“- 无”）\n\n## 修复\n- TODO: 请填写本次修复的问题（若无请写“- 无”）\n\n## 升级与兼容性\n- TODO: 请填写破坏性变更或最低版本要求（若无请写“- 无”）",
+          "has_framework": false,
+          "has_skills": false,
+          "environments": {
+            "rootful": {
+              "arch": "iphoneos-arm",
+              "depends": [
+                "mobilesubstrate"
+              ],
+              "deb": "debs/com.summer.disttest_0.0.1-2+c4c384_iphoneos-arm.deb",
+              "size": 4760,
+              "sha256": "16740720c0e819f58fae949720df291a1dec2ec7f8ead0e3a50dd5e226912600"
+            },
+            "rootless": {
+              "arch": "iphoneos-arm64",
+              "depends": [
+                "ellekit"
+              ],
+              "deb": "debs/com.summer.disttest_0.0.1-2+c4c384_iphoneos-arm64.deb",
+              "size": 4784,
+              "sha256": "fc381e79452624b24cf2eb0495898400ea7eb086d27eba692a3278fd949e0d66"
+            },
+            "roothide": {
+              "arch": "iphoneos-arm64e",
+              "depends": [
+                "ellekit"
+              ],
+              "deb": "debs/com.summer.disttest_0.0.1-2+c4c384_iphoneos-arm64e.deb",
+              "size": 4756,
+              "sha256": "eeb68f6f048c68cee5c777c291067ce3b72d92f98a3623a80123554a8487db33"
             }
           }
         }

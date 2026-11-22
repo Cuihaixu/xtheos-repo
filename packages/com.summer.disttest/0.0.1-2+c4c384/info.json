@@ -1,0 +1,62 @@
+{
+  "format": 1,
+  "name": "DistTest",
+  "id": "com.summer.disttest",
+  "package": "com.summer.disttest",
+  "version": "0.0.1-2+c4c384",
+  "base_version": "0.0.1",
+  "type": "package",
+  "section": "Utilities",
+  "envs": [
+    "rootful",
+    "rootless",
+    "roothide"
+  ],
+  "author": "cu",
+  "authors": "cu",
+  "maintainer": "cu",
+  "description": "A command-line tool built with xtheos",
+  "depends": "mobilesubstrate",
+  "git_commit": "32b42c",
+  "built_at": "2026-11-22T03:15:54Z",
+  "origin": {
+    "kind": "dist",
+    "from": "/private/var/folders/l4/3xsgfqdn5g95cykc6y40_vt40000gn/T/tmpgh168rwl/DistTest",
+    "commit": "",
+    "machine": "cu-cu-Mac-mini-035059",
+    "time": "2026-11-22T03:15:54Z"
+  },
+  "hash": "358f102929dd2353f2bd6f765326bedfbe57fe221b9e1392b7fe8a6adbde0b3b",
+  "has_framework": false,
+  "has_skills": false,
+  "release_notes": "# DistTest 0.0.1-2+c4c384\n\n## 新功能\n- TODO: 请填写本次新增功能（若无请写“- 无”）\n\n## 改进\n- TODO: 请填写本次优化与改进（若无请写“- 无”）\n\n## 修复\n- TODO: 请填写本次修复的问题（若无请写“- 无”）\n\n## 升级与兼容性\n- TODO: 请填写破坏性变更或最低版本要求（若无请写“- 无”）",
+  "environments": {
+    "rootful": {
+      "arch": "iphoneos-arm",
+      "depends": [
+        "mobilesubstrate"
+      ],
+      "deb": "debs/com.summer.disttest_0.0.1-2+c4c384_iphoneos-arm.deb",
+      "size": 4760,
+      "sha256": "16740720c0e819f58fae949720df291a1dec2ec7f8ead0e3a50dd5e226912600"
+    },
+    "rootless": {
+      "arch": "iphoneos-arm64",
+      "depends": [
+        "ellekit"
+      ],
+      "deb": "debs/com.summer.disttest_0.0.1-2+c4c384_iphoneos-arm64.deb",
+      "size": 4784,
+      "sha256": "fc381e79452624b24cf2eb0495898400ea7eb086d27eba692a3278fd949e0d66"
+    },
+    "roothide": {
+      "arch": "iphoneos-arm64e",
+      "depends": [
+        "ellekit"
+      ],
+      "deb": "debs/com.summer.disttest_0.0.1-2+c4c384_iphoneos-arm64e.deb",
+      "size": 4756,
+      "sha256": "eeb68f6f048c68cee5c777c291067ce3b72d92f98a3623a80123554a8487db33"
+    }
+  }
+}

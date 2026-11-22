@@ -1,0 +1,5 @@
+855516c68bbb8f17bc1fcfcc8b6ca9d7c831e37ec119c08a7ebde6f97326301b  RELEASE_NOTES.md
+16740720c0e819f58fae949720df291a1dec2ec7f8ead0e3a50dd5e226912600  debs/com.summer.disttest_0.0.1-2+c4c384_iphoneos-arm.deb
+fc381e79452624b24cf2eb0495898400ea7eb086d27eba692a3278fd949e0d66  debs/com.summer.disttest_0.0.1-2+c4c384_iphoneos-arm64.deb
+eeb68f6f048c68cee5c777c291067ce3b72d92f98a3623a80123554a8487db33  debs/com.summer.disttest_0.0.1-2+c4c384_iphoneos-arm64e.deb
+c787c59ddf28962d9cee697e4c43d118936e1eed84d3c6853830ca1ce18518c5  info.json
