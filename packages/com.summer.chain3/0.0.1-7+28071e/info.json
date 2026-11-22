@@ -1,0 +1,62 @@
+{
+  "format": 1,
+  "name": "Chain3Multi",
+  "id": "com.summer.chain3",
+  "package": "com.summer.chain3",
+  "version": "0.0.1-7+28071e",
+  "base_version": "0.0.1",
+  "type": "package",
+  "section": "Utilities",
+  "envs": [
+    "rootful",
+    "rootless",
+    "roothide"
+  ],
+  "author": "cu",
+  "authors": "cu",
+  "maintainer": "cu",
+  "description": "A command-line tool built with xtheos",
+  "depends": "mobilesubstrate",
+  "git_commit": "06ceff",
+  "built_at": "2026-11-22T05:32:10Z",
+  "origin": {
+    "kind": "dist",
+    "from": "/private/var/folders/l4/3xsgfqdn5g95cykc6y40_vt40000gn/T/xtheos_wf_test_hbrb9eh4/Chain3Multi",
+    "commit": "",
+    "machine": "cu-cu-Mac-mini-035059",
+    "time": "2026-11-22T05:32:10Z"
+  },
+  "hash": "6222cde0b1b30f5a1cf32aa280cada2bb241b554931f6f2b5afbe174c94599ea",
+  "has_framework": false,
+  "has_skills": false,
+  "release_notes": "# Chain3Multi 0.0.1-7+28071e\n\n## 新功能\n- TODO: 请填写本次新增功能（若无请写“- 无”）\n\n## 改进\n- TODO: 请填写本次优化与改进（若无请写“- 无”）\n\n## 修复\n- TODO: 请填写本次修复的问题（若无请写“- 无”）\n\n## 升级与兼容性\n- TODO: 请填写破坏性变更或最低版本要求（若无请写“- 无”）",
+  "environments": {
+    "rootful": {
+      "arch": "iphoneos-arm",
+      "depends": [
+        "mobilesubstrate"
+      ],
+      "deb": "debs/com.summer.chain3_0.0.1-7+28071e_iphoneos-arm.deb",
+      "size": 4792,
+      "sha256": "6a25085bce571d5c12fc0d2f246c66153b877d07a1fcc3dcf8b4d3af0e4ea0e1"
+    },
+    "rootless": {
+      "arch": "iphoneos-arm64",
+      "depends": [
+        "ellekit"
+      ],
+      "deb": "debs/com.summer.chain3_0.0.1-7+28071e_iphoneos-arm64.deb",
+      "size": 4814,
+      "sha256": "dc9702fab84110cfa955b4dc125767fd5101171d74b0cab5c33a64c7f66721dc"
+    },
+    "roothide": {
+      "arch": "iphoneos-arm64e",
+      "depends": [
+        "ellekit"
+      ],
+      "deb": "debs/com.summer.chain3_0.0.1-7+28071e_iphoneos-arm64e.deb",
+      "size": 4790,
+      "sha256": "9546ee469a55d2ce0a4f35f1b45d41a72c710f356f3eb82928568b88b3309151"
+    }
+  }
+}
