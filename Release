@@ -6,13 +6,13 @@ Codename: ios
 Architectures: iphoneos-arm iphoneos-arm64 iphoneos-arm64e
 Components: main
 Description: xtheos package repository
-Date: Tue, 24 Nov 2026 15:14:53 UTC
+Date: Tue, 24 Nov 2026 16:15:21 UTC
 MD5Sum:
- 281d442aac7bdf08acea7f34fe52fbcc     1745 Packages.gz
- ff8e8346c782d782d98511426d097bef     1956 Packages.bz2
+ bea914fb1c7a9e5504542e980307f9dc     1817 Packages.gz
+ 7102dd3defb34323362ff03c187225c8     2072 Packages.bz2
 SHA1:
- 6b6679388a860711fa983729b211960d75b73a11     1745 Packages.gz
- ce65a759aab7d7e8501f4b7677677dcf0546ae27     1956 Packages.bz2
+ 12ce09f36d4f4985c419fbe9014aa54a7df096dc     1817 Packages.gz
+ 2abefcd310da83c65db0da470a8f8621317e03e0     2072 Packages.bz2
 SHA256:
- 876ec131ed993b445e61a3ca0aa5fb125d3f06a3742af13a8342b715c5255e22     1745 Packages.gz
- a5f9817b38fcb896dfcc49a5a5d96bc0d96af5d3765e860a49daf70c0fea50f5     1956 Packages.bz2
+ 9d10eb68bcc52c05cd0b013e8439289913293ebdea011876978baa2c4706d2e2     1817 Packages.gz
+ 78f0cc5badf6b0e1ae5138723dc43bb347d2de86de5b8ade7fcfbea2c353da30     2072 Packages.bz2

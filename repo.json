@@ -2,5 +2,7 @@
   "name": "xtheos",
   "description": "xtheos package repository",
   "keep_versions": 4,
-  "auto_push_dev": true
+  "auto_push_dev": true,
+  "web_url": "https://repo.iospkg.cn/",
+  "tint_color": "#38BDF8"
 }

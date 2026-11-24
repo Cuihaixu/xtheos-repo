@@ -1,0 +1,101 @@
+{
+  "minVersion": "0.7",
+  "tintColor": "#38BDF8",
+  "class": "DepictionTabView",
+  "tabs": [
+    {
+      "class": "DepictionStackView",
+      "tabname": "详情",
+      "views": [
+        {
+          "class": "DepictionMarkdownView",
+          "markdown": "A jailbreak package (a background daemon, a dynamic library, a jailbreak tweak) built with xtheos",
+          "useSpacing": true
+        },
+        {
+          "class": "DepictionSeparatorView"
+        },
+        {
+          "class": "DepictionSubheaderView",
+          "title": "最新版本 v0.2.3 更新内容",
+          "useBoldText": true,
+          "useBottomMargin": false
+        },
+        {
+          "class": "DepictionMarkdownView",
+          "markdown": "# Conduit 0.2.3\n\n## 新功能\n- 适配 xtheos 1.0.0 规范，支持 rootful、rootless、roothide 三越狱环境全架构（arm64 / arm64e）自动出包与编译壳导出。\n- 单条消息载荷上限提升至 10MB，偏好存储单值上限提升至 1MB、单域上限提升至 10MB。\n\n## 改进\n- 守护进程与服务组件全面升级为原生 Xcode 多产物构建系统，支持目标依赖自动解析与符号防丢。\n- 完善三环境动态库编译壳（Conduit.framework、Conduit.tbd、头文件与导出符号）。\n\n## 修复\n- 修复复杂并发通信场景下服务端连接断开重连时状态不同步的问题。\n- 修复多 Target 组合出包时架构矩阵缺失的隐患。\n\n## 升级与兼容性\n- 向下兼容所有既有 Conduit 客户端 API，上层组件（如 harness）可直接无缝链接。",
+          "useSpacing": true
+        },
+        {
+          "class": "DepictionSeparatorView"
+        },
+        {
+          "class": "DepictionSubheaderView",
+          "title": "软件包信息",
+          "useBoldText": true,
+          "useBottomMargin": false
+        },
+        {
+          "class": "DepictionTableTextView",
+          "title": "版本",
+          "text": "0.2.3"
+        },
+        {
+          "class": "DepictionTableTextView",
+          "title": "构建",
+          "text": "6+e092cb"
+        },
+        {
+          "class": "DepictionTableTextView",
+          "title": "支持环境",
+          "text": "rootful / rootless / roothide"
+        },
+        {
+          "class": "DepictionTableTextView",
+          "title": "分类",
+          "text": "System"
+        },
+        {
+          "class": "DepictionTableTextView",
+          "title": "作者",
+          "text": "cu"
+        },
+        {
+          "class": "DepictionTableTextView",
+          "title": "维护者",
+          "text": "cu"
+        },
+        {
+          "class": "DepictionTableTextView",
+          "title": "更新日期",
+          "text": "2026-11-21"
+        }
+      ]
+    },
+    {
+      "class": "DepictionStackView",
+      "tabname": "更新记录",
+      "views": [
+        {
+          "class": "DepictionSubheaderView",
+          "title": "v0.2.3  (2026-11-21)",
+          "useBoldText": true,
+          "useBottomMargin": false
+        },
+        {
+          "class": "DepictionLabelView",
+          "text": "Build 6+e092cb",
+          "fontSize": 12,
+          "textColor": "#8E8E93",
+          "margins": "{2, 15, 4, 15}"
+        },
+        {
+          "class": "DepictionMarkdownView",
+          "markdown": "# Conduit 0.2.3\n\n## 新功能\n- 适配 xtheos 1.0.0 规范，支持 rootful、rootless、roothide 三越狱环境全架构（arm64 / arm64e）自动出包与编译壳导出。\n- 单条消息载荷上限提升至 10MB，偏好存储单值上限提升至 1MB、单域上限提升至 10MB。\n\n## 改进\n- 守护进程与服务组件全面升级为原生 Xcode 多产物构建系统，支持目标依赖自动解析与符号防丢。\n- 完善三环境动态库编译壳（Conduit.framework、Conduit.tbd、头文件与导出符号）。\n\n## 修复\n- 修复复杂并发通信场景下服务端连接断开重连时状态不同步的问题。\n- 修复多 Target 组合出包时架构矩阵缺失的隐患。\n\n## 升级与兼容性\n- 向下兼容所有既有 Conduit 客户端 API，上层组件（如 harness）可直接无缝链接。",
+          "useSpacing": true
+        }
+      ]
+    }
+  ],
+  "headerImage": "https://repo.iospkg.cn/assets/banner.png"
+}
