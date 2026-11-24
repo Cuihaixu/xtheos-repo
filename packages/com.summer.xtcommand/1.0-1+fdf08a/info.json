@@ -1,0 +1,60 @@
+{
+  "format": 1,
+  "package": "com.summer.xtcommand",
+  "name": "XTCommand",
+  "version": "1.0-1+fdf08a",
+  "authors": "cu",
+  "type": "dynamic",
+  "depends": "",
+  "description": "A dynamic library built with xtheos",
+  "envs": [
+    "rootful",
+    "rootless",
+    "roothide"
+  ],
+  "origin": {
+    "kind": "build",
+    "from": "/Users/cu/Documents/Reverse/ios-tools/XTCommand",
+    "commit": "57f96d3-dirty",
+    "machine": "cu的Mac mini",
+    "time": "2026-11-23T22:06:22+08:00"
+  },
+  "id": "com.summer.xtcommand",
+  "base_version": "1.0",
+  "hash": "2bfc64ff86392fd92809a3079dd306715f5b58139e6e50f547e0850d6b3fbe8d",
+  "section": "Development",
+  "author": "cu",
+  "maintainer": "cu",
+  "has_framework": true,
+  "has_skills": true,
+  "release_notes": "",
+  "environments": {
+    "rootful": {
+      "arch": "iphoneos-arm",
+      "depends": [
+        "mobilesubstrate"
+      ],
+      "deb": "debs/com.summer.xtcommand_1.0-1+fdf08a_iphoneos-arm.deb",
+      "size": 888012,
+      "sha256": "f4a73c080e95d126eaf3e4d9811be81cf6796396ad8f9cc66a377d2f51fb226f"
+    },
+    "rootless": {
+      "arch": "iphoneos-arm64",
+      "depends": [
+        "ellekit"
+      ],
+      "deb": "debs/com.summer.xtcommand_1.0-1+fdf08a_iphoneos-arm64.deb",
+      "size": 888034,
+      "sha256": "0169e4f3587d3a980f5361267bdc6b45b7a0d0c98c7befd2fdd20b25ba941600"
+    },
+    "roothide": {
+      "arch": "iphoneos-arm64e",
+      "depends": [
+        "ellekit"
+      ],
+      "deb": "debs/com.summer.xtcommand_1.0-1+fdf08a_iphoneos-arm64e.deb",
+      "size": 888010,
+      "sha256": "296309f5ce4cb7095821ca2686e2eeda1d73eaf24413289969418bb3c9888903"
+    }
+  }
+}

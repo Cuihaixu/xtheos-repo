@@ -3,8 +3,8 @@
   "name": "default",
   "description": "xtheos package repository",
   "keep_versions": 4,
-  "hash": "d5a084b7dc972a0084590bc85b7aa045b8ffa1f3a1974413fe67504cc76834b1",
-  "updated_at": "2026-11-22T06:57:55Z",
+  "hash": "70c80c687b1ba4960f7be08df2a2a49f4b970957596127bfe3b6b028188ca7b8",
+  "updated_at": "2026-11-24T14:36:53Z",
   "packages": {
     "com.summer.chain3": {
       "id": "com.summer.chain3",
@@ -400,52 +400,180 @@
         }
       ]
     },
+    "com.summer.xtcommand": {
+      "id": "com.summer.xtcommand",
+      "name": "XTCommand",
+      "current_version": "1.0-1+fdf08a",
+      "base_version": "1.0",
+      "hash": "2bfc64ff86392fd92809a3079dd306715f5b58139e6e50f547e0850d6b3fbe8d",
+      "section": "Development",
+      "description": "A dynamic library built with xtheos",
+      "author": "cu",
+      "maintainer": "cu",
+      "has_framework": true,
+      "has_skills": true,
+      "release_notes": "",
+      "environments": {
+        "rootful": {
+          "arch": "iphoneos-arm",
+          "depends": [
+            "mobilesubstrate"
+          ],
+          "deb": "debs/com.summer.xtcommand_1.0-1+fdf08a_iphoneos-arm.deb",
+          "size": 888012,
+          "sha256": "f4a73c080e95d126eaf3e4d9811be81cf6796396ad8f9cc66a377d2f51fb226f"
+        },
+        "rootless": {
+          "arch": "iphoneos-arm64",
+          "depends": [
+            "ellekit"
+          ],
+          "deb": "debs/com.summer.xtcommand_1.0-1+fdf08a_iphoneos-arm64.deb",
+          "size": 888034,
+          "sha256": "0169e4f3587d3a980f5361267bdc6b45b7a0d0c98c7befd2fdd20b25ba941600"
+        },
+        "roothide": {
+          "arch": "iphoneos-arm64e",
+          "depends": [
+            "ellekit"
+          ],
+          "deb": "debs/com.summer.xtcommand_1.0-1+fdf08a_iphoneos-arm64e.deb",
+          "size": 888010,
+          "sha256": "296309f5ce4cb7095821ca2686e2eeda1d73eaf24413289969418bb3c9888903"
+        }
+      },
+      "versions": [
+        {
+          "version": "1.0-1+fdf08a",
+          "base_version": "1.0",
+          "hash": "2bfc64ff86392fd92809a3079dd306715f5b58139e6e50f547e0850d6b3fbe8d",
+          "release_notes": "",
+          "has_framework": true,
+          "has_skills": true,
+          "environments": {
+            "rootful": {
+              "arch": "iphoneos-arm",
+              "depends": [
+                "mobilesubstrate"
+              ],
+              "deb": "debs/com.summer.xtcommand_1.0-1+fdf08a_iphoneos-arm.deb",
+              "size": 888012,
+              "sha256": "f4a73c080e95d126eaf3e4d9811be81cf6796396ad8f9cc66a377d2f51fb226f"
+            },
+            "rootless": {
+              "arch": "iphoneos-arm64",
+              "depends": [
+                "ellekit"
+              ],
+              "deb": "debs/com.summer.xtcommand_1.0-1+fdf08a_iphoneos-arm64.deb",
+              "size": 888034,
+              "sha256": "0169e4f3587d3a980f5361267bdc6b45b7a0d0c98c7befd2fdd20b25ba941600"
+            },
+            "roothide": {
+              "arch": "iphoneos-arm64e",
+              "depends": [
+                "ellekit"
+              ],
+              "deb": "debs/com.summer.xtcommand_1.0-1+fdf08a_iphoneos-arm64e.deb",
+              "size": 888010,
+              "sha256": "296309f5ce4cb7095821ca2686e2eeda1d73eaf24413289969418bb3c9888903"
+            }
+          }
+        }
+      ]
+    },
     "com.summer.xtheos": {
       "id": "com.summer.xtheos",
       "name": "xtheos",
-      "current_version": "0.9.0-6+62e1bc",
-      "base_version": "0.9.0",
-      "hash": "490a2f3dbaac022ec5abe83a97931bd5a465c2a7eb0b478e062c1fedba41a5b4",
-      "section": "Development",
-      "description": "Xcode 越狱调试 harness —— hook 插件(xtheos)+ 守护进程(xtheosd)",
+      "current_version": "1.0.0-2+a71f97",
+      "base_version": "1.0.0",
+      "hash": "dd3c943f0543022636237f1c99ff341ea88968285e9fa57c3ea5557a40ddba70",
+      "section": "System",
+      "description": "A jailbreak package (a background daemon, a command-line tool, a jailbreak tweak) built with xtheos",
       "author": "cu",
       "maintainer": "cu",
       "has_framework": false,
       "has_skills": false,
-      "release_notes": "# xtheos 0.9.0\n\n## 新功能\n- 全面适配 xtheos 1.0 标准工程规范与多产物打包体系。\n- 迁移 IPC 通信架构至 Conduit (com.summer.conduit)，由系统级 ConduitService 统一接管跨进程与沙盒通信。\n\n## 改进\n- 移除遗留 hand-rolled mach IPC 与 MobileGestaltHelper 自建 broker 逻辑，提升系统级通信稳定性。\n- 统一由 xtheos 驱动三环境 (rootful / rootless / roothide) 打包与依赖链管理。\n\n## 修复\n- 无\n\n## 升级与兼容性\n- 强依赖 com.summer.conduit (>= 0.2.3)，安装时将由包管理器自动拉取并装配。",
+      "release_notes": "# ixtheos 0.9.1\n\n## 新功能\n- 守护进程 xtheosd 纯内存跨进程会话管理与集中调度\n- 支持多 Target 并发构建与无冲突路由\n\n## 改进\n- Hook 插件全面轻量化，移除 run.plist 磁盘依赖，全走 Mach IPC 委托\n- 守护进程自适应 roothide / rootless / rootful 路径解析\n\n## 修复\n- 修复 SpringBoard 等常驻系统进程在 Attach to Process 时卡死的问题，实现秒级原生透传依附\n\n## 升级与兼容性\n- 兼容 iOS 14.0+，支持 rootful、rootless、roothide 三种越狱环境",
       "environments": {
         "rootful": {
           "arch": "iphoneos-arm",
           "depends": [
             "com.summer.conduit (>= 0.2.3)",
+            "com.summer.xtcommand (>= 1.0.0)",
             "mobilesubstrate"
           ],
-          "deb": "debs/com.summer.xtheos_0.9.0-6+62e1bc_iphoneos-arm.deb",
-          "size": 1549626,
-          "sha256": "c02a7d468293dc1401749d6d69808ba18edd78fb84d87b2b8e338b1d5812f54d"
+          "deb": "debs/com.summer.xtheos_1.0.0-2+a71f97_iphoneos-arm.deb",
+          "size": 1574100,
+          "sha256": "d1d6b8b358d6fed99ceb3d0d6a1a4b6f2d19ec5baa14857154cf73b6a589d77c"
         },
         "rootless": {
           "arch": "iphoneos-arm64",
           "depends": [
             "com.summer.conduit (>= 0.2.3)",
+            "com.summer.xtcommand (>= 1.0.0)",
             "ellekit"
           ],
-          "deb": "debs/com.summer.xtheos_0.9.0-6+62e1bc_iphoneos-arm64.deb",
-          "size": 1549740,
-          "sha256": "6ffbb930680fae34d1caadab5e991f2ad4b084b0c94de0f91ecefacdd86ca230"
+          "deb": "debs/com.summer.xtheos_1.0.0-2+a71f97_iphoneos-arm64.deb",
+          "size": 1574176,
+          "sha256": "b3554d162696d2e1478b19132437401b3081a7a57e62ae376805cc38c160388b"
         },
         "roothide": {
           "arch": "iphoneos-arm64e",
           "depends": [
             "com.summer.conduit (>= 0.2.3)",
+            "com.summer.xtcommand (>= 1.0.0)",
             "ellekit"
           ],
-          "deb": "debs/com.summer.xtheos_0.9.0-6+62e1bc_iphoneos-arm64e.deb",
-          "size": 1549632,
-          "sha256": "c876208d6f420e02147e3da7cd4cf66effcb8f967fc8ab8195e6377df7096e58"
+          "deb": "debs/com.summer.xtheos_1.0.0-2+a71f97_iphoneos-arm64e.deb",
+          "size": 1574088,
+          "sha256": "8d2ffe336ce01a1fbf70d35e695967c57181122db014b6c43ea92707badc0619"
         }
       },
       "versions": [
+        {
+          "version": "1.0.0-2+a71f97",
+          "base_version": "1.0.0",
+          "hash": "dd3c943f0543022636237f1c99ff341ea88968285e9fa57c3ea5557a40ddba70",
+          "release_notes": "# ixtheos 0.9.1\n\n## 新功能\n- 守护进程 xtheosd 纯内存跨进程会话管理与集中调度\n- 支持多 Target 并发构建与无冲突路由\n\n## 改进\n- Hook 插件全面轻量化，移除 run.plist 磁盘依赖，全走 Mach IPC 委托\n- 守护进程自适应 roothide / rootless / rootful 路径解析\n\n## 修复\n- 修复 SpringBoard 等常驻系统进程在 Attach to Process 时卡死的问题，实现秒级原生透传依附\n\n## 升级与兼容性\n- 兼容 iOS 14.0+，支持 rootful、rootless、roothide 三种越狱环境",
+          "has_framework": false,
+          "has_skills": false,
+          "environments": {
+            "rootful": {
+              "arch": "iphoneos-arm",
+              "depends": [
+                "com.summer.conduit (>= 0.2.3)",
+                "com.summer.xtcommand (>= 1.0.0)",
+                "mobilesubstrate"
+              ],
+              "deb": "debs/com.summer.xtheos_1.0.0-2+a71f97_iphoneos-arm.deb",
+              "size": 1574100,
+              "sha256": "d1d6b8b358d6fed99ceb3d0d6a1a4b6f2d19ec5baa14857154cf73b6a589d77c"
+            },
+            "rootless": {
+              "arch": "iphoneos-arm64",
+              "depends": [
+                "com.summer.conduit (>= 0.2.3)",
+                "com.summer.xtcommand (>= 1.0.0)",
+                "ellekit"
+              ],
+              "deb": "debs/com.summer.xtheos_1.0.0-2+a71f97_iphoneos-arm64.deb",
+              "size": 1574176,
+              "sha256": "b3554d162696d2e1478b19132437401b3081a7a57e62ae376805cc38c160388b"
+            },
+            "roothide": {
+              "arch": "iphoneos-arm64e",
+              "depends": [
+                "com.summer.conduit (>= 0.2.3)",
+                "com.summer.xtcommand (>= 1.0.0)",
+                "ellekit"
+              ],
+              "deb": "debs/com.summer.xtheos_1.0.0-2+a71f97_iphoneos-arm64e.deb",
+              "size": 1574088,
+              "sha256": "8d2ffe336ce01a1fbf70d35e695967c57181122db014b6c43ea92707badc0619"
+            }
+          }
+        },
         {
           "version": "0.9.0-6+62e1bc",
           "base_version": "0.9.0",
@@ -563,46 +691,6 @@
               "deb": "debs/com.summer.xtheos_0.9.0-4+8db5c2_iphoneos-arm64e.deb",
               "size": 1548780,
               "sha256": "2f4f848c1a9d44d6df93b2a525198f7e28e7352ec9e6e84bfba97c92efa36efa"
-            }
-          }
-        },
-        {
-          "version": "0.9.0-3+168176",
-          "base_version": "0.9.0",
-          "hash": "6a10306885f4f38f5e3480359671a37b8a3b9ff8f5592049475b6844d0565e96",
-          "release_notes": "# xtheos 0.9.0\n\n## 新功能\n- 全面适配 xtheos 1.0 标准工程规范与多产物打包体系。\n- 迁移 IPC 通信架构至 Conduit (com.summer.conduit)，由系统级 ConduitService 统一接管跨进程与沙盒通信。\n\n## 改进\n- 移除遗留 hand-rolled mach IPC 与 MobileGestaltHelper 自建 broker 逻辑，提升系统级通信稳定性。\n- 统一由 xtheos 驱动三环境 (rootful / rootless / roothide) 打包与依赖链管理。\n\n## 修复\n- 无\n\n## 升级与兼容性\n- 强依赖 com.summer.conduit (>= 0.2.3)，安装时将由包管理器自动拉取并装配。",
-          "has_framework": false,
-          "has_skills": false,
-          "environments": {
-            "rootful": {
-              "arch": "iphoneos-arm",
-              "depends": [
-                "com.summer.conduit (>= 0.2.3)",
-                "mobilesubstrate"
-              ],
-              "deb": "debs/com.summer.xtheos_0.9.0-3+168176_iphoneos-arm.deb",
-              "size": 1548472,
-              "sha256": "decb5084698f82230be972a3d52a106e72e7d6a732c27fa3035762e3a4d418e3"
-            },
-            "rootless": {
-              "arch": "iphoneos-arm64",
-              "depends": [
-                "com.summer.conduit (>= 0.2.3)",
-                "ellekit"
-              ],
-              "deb": "debs/com.summer.xtheos_0.9.0-3+168176_iphoneos-arm64.deb",
-              "size": 1548604,
-              "sha256": "e8cee7e25e606543e6f726e64f66688b24a6d00dd53e6d5d695e900831568c96"
-            },
-            "roothide": {
-              "arch": "iphoneos-arm64e",
-              "depends": [
-                "com.summer.conduit (>= 0.2.3)",
-                "ellekit"
-              ],
-              "deb": "debs/com.summer.xtheos_0.9.0-3+168176_iphoneos-arm64e.deb",
-              "size": 1548472,
-              "sha256": "556dfc2780b93cc19700040dcc07dcc922d57694daced2ef99c69b371264d693"
             }
           }
         }
