@@ -3,8 +3,8 @@
   "name": "default",
   "description": "xtheos package repository",
   "keep_versions": 4,
-  "hash": "70c80c687b1ba4960f7be08df2a2a49f4b970957596127bfe3b6b028188ca7b8",
-  "updated_at": "2026-11-24T14:36:53Z",
+  "hash": "cea82b3b64c4197ad77e8982ca001b6d39f7ba8939ab9a1ae882d280d2d4e376",
+  "updated_at": "2026-11-24T14:38:05Z",
   "packages": {
     "com.summer.chain3": {
       "id": "com.summer.chain3",
@@ -487,14 +487,14 @@
       "name": "xtheos",
       "current_version": "1.0.0-2+a71f97",
       "base_version": "1.0.0",
-      "hash": "dd3c943f0543022636237f1c99ff341ea88968285e9fa57c3ea5557a40ddba70",
+      "hash": "dd4315fadfba1fbaeae63dba8ec1c3864bca22dfcf604a61e98cec49b7b977e8",
       "section": "System",
       "description": "A jailbreak package (a background daemon, a command-line tool, a jailbreak tweak) built with xtheos",
       "author": "cu",
       "maintainer": "cu",
       "has_framework": false,
       "has_skills": false,
-      "release_notes": "# ixtheos 0.9.1\n\n## 新功能\n- 守护进程 xtheosd 纯内存跨进程会话管理与集中调度\n- 支持多 Target 并发构建与无冲突路由\n\n## 改进\n- Hook 插件全面轻量化，移除 run.plist 磁盘依赖，全走 Mach IPC 委托\n- 守护进程自适应 roothide / rootless / rootful 路径解析\n\n## 修复\n- 修复 SpringBoard 等常驻系统进程在 Attach to Process 时卡死的问题，实现秒级原生透传依附\n\n## 升级与兼容性\n- 兼容 iOS 14.0+，支持 rootful、rootless、roothide 三种越狱环境",
+      "release_notes": "# ixtheos 1.0.0\n\n## 新功能\n- 重构为「薄 Hook 代理 + 厚守护进程中枢 (`xtheosd`)」架构，纯内存跨进程会话状态机 (`XTSessionRegistry`) 支持多 Target 并发路由与自动过期淘汰\n- 新增手机端官方诊断与自动化测试命令行工具 `xt`（支持 `xt diag` 环境自检与 `xt test` / `--json` 自动化断言套件）\n- 通过 `xtheos/Layout.bundle` 正式内置 iOS 14 / 15 / 16 预签高权 `debugserver`，支持 `lockdownd` 自动按系统版本调包提权，开箱即用免手动直推\n- 恢复并完善 `debugserver` 依附模式 OSLog 实时流式注入控制台及 `setbinpref` / `setarchpref` 参数捕获\n\n## 改进\n- 全面移除 `run.plist` 磁盘读写与 `/tmp` 调试文件残留，消除 roothide 下的沙盒拒写噪音，`SET_SESSION` 响应提速至 ~4ms\n- 完善 `XTPkgInstaller` 环境校验、`Provides` 虚拟依赖预检及 dpkg 文件冲突错误引导\n- 统一 `xtheos`、`xtheosd`、`xt` 三产物双架构（`arm64` + `arm64e`）并全量纳入 `rootful`、`rootless`、`roothide` 三环境合包\n\n## 修复\n- 修复 `SpringBoard`、`backboardd` 等常驻系统进程在 `Attach to Process` 时卡死或被残留会话串号改写的问题，实现白名单原生秒级依附\n- 修复 `hook_debugserver` 在 Launch 模式下对守护进程（`mode=2`）未启用 `posix_spawn` 代跑导致触发签名校验失败的问题\n- 修复 `hook_debugserver` 在 Wait 模式下依附守护进程未强制 `ignoreExisting=true` 导致误附旧进程旋即被 `unload` 强杀（`signal 9`）的竞态问题\n- 修复 App / Tweak Replace Run 模式（`XTHEOS_RUN_BUNDLE_ID`）缺少 `LSApplicationProxy` 真实 `.app` 路径与可执行名解析的问题\n- 修复 `streaming_zip_conduit` 对二次 `Cmd + R` sparse 增量包的二级容灾短路\n\n## 升级与兼容性\n- 兼容 iOS 14.0+，完整支持 `rootful`（`iphoneos-arm`）、`rootless`（`iphoneos-arm64`）、`roothide`（`iphoneos-arm64e`）三种越狱环境\n- 依赖 `com.summer.conduit (>= 0.2.3)` 与 `com.summer.xtcommand (>= 1.0.0)`\n- 从 `0.9.x` 升级可直接覆盖安装，旧版手动推送的 `/usr/libexec/xtheos/{14,15,16}/debugserver` 将由包内 `Layout.bundle` 自动接管",
       "environments": {
         "rootful": {
           "arch": "iphoneos-arm",
@@ -534,8 +534,8 @@
         {
           "version": "1.0.0-2+a71f97",
           "base_version": "1.0.0",
-          "hash": "dd3c943f0543022636237f1c99ff341ea88968285e9fa57c3ea5557a40ddba70",
-          "release_notes": "# ixtheos 0.9.1\n\n## 新功能\n- 守护进程 xtheosd 纯内存跨进程会话管理与集中调度\n- 支持多 Target 并发构建与无冲突路由\n\n## 改进\n- Hook 插件全面轻量化，移除 run.plist 磁盘依赖，全走 Mach IPC 委托\n- 守护进程自适应 roothide / rootless / rootful 路径解析\n\n## 修复\n- 修复 SpringBoard 等常驻系统进程在 Attach to Process 时卡死的问题，实现秒级原生透传依附\n\n## 升级与兼容性\n- 兼容 iOS 14.0+，支持 rootful、rootless、roothide 三种越狱环境",
+          "hash": "dd4315fadfba1fbaeae63dba8ec1c3864bca22dfcf604a61e98cec49b7b977e8",
+          "release_notes": "# ixtheos 1.0.0\n\n## 新功能\n- 重构为「薄 Hook 代理 + 厚守护进程中枢 (`xtheosd`)」架构，纯内存跨进程会话状态机 (`XTSessionRegistry`) 支持多 Target 并发路由与自动过期淘汰\n- 新增手机端官方诊断与自动化测试命令行工具 `xt`（支持 `xt diag` 环境自检与 `xt test` / `--json` 自动化断言套件）\n- 通过 `xtheos/Layout.bundle` 正式内置 iOS 14 / 15 / 16 预签高权 `debugserver`，支持 `lockdownd` 自动按系统版本调包提权，开箱即用免手动直推\n- 恢复并完善 `debugserver` 依附模式 OSLog 实时流式注入控制台及 `setbinpref` / `setarchpref` 参数捕获\n\n## 改进\n- 全面移除 `run.plist` 磁盘读写与 `/tmp` 调试文件残留，消除 roothide 下的沙盒拒写噪音，`SET_SESSION` 响应提速至 ~4ms\n- 完善 `XTPkgInstaller` 环境校验、`Provides` 虚拟依赖预检及 dpkg 文件冲突错误引导\n- 统一 `xtheos`、`xtheosd`、`xt` 三产物双架构（`arm64` + `arm64e`）并全量纳入 `rootful`、`rootless`、`roothide` 三环境合包\n\n## 修复\n- 修复 `SpringBoard`、`backboardd` 等常驻系统进程在 `Attach to Process` 时卡死或被残留会话串号改写的问题，实现白名单原生秒级依附\n- 修复 `hook_debugserver` 在 Launch 模式下对守护进程（`mode=2`）未启用 `posix_spawn` 代跑导致触发签名校验失败的问题\n- 修复 `hook_debugserver` 在 Wait 模式下依附守护进程未强制 `ignoreExisting=true` 导致误附旧进程旋即被 `unload` 强杀（`signal 9`）的竞态问题\n- 修复 App / Tweak Replace Run 模式（`XTHEOS_RUN_BUNDLE_ID`）缺少 `LSApplicationProxy` 真实 `.app` 路径与可执行名解析的问题\n- 修复 `streaming_zip_conduit` 对二次 `Cmd + R` sparse 增量包的二级容灾短路\n\n## 升级与兼容性\n- 兼容 iOS 14.0+，完整支持 `rootful`（`iphoneos-arm`）、`rootless`（`iphoneos-arm64`）、`roothide`（`iphoneos-arm64e`）三种越狱环境\n- 依赖 `com.summer.conduit (>= 0.2.3)` 与 `com.summer.xtcommand (>= 1.0.0)`\n- 从 `0.9.x` 升级可直接覆盖安装，旧版手动推送的 `/usr/libexec/xtheos/{14,15,16}/debugserver` 将由包内 `Layout.bundle` 自动接管",
           "has_framework": false,
           "has_skills": false,
           "environments": {
