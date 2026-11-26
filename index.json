@@ -3,8 +3,8 @@
   "name": "xtheos",
   "description": "xtheos harness 源(com.summer.xtheos)",
   "keep_versions": 4,
-  "hash": "df24581579e0179b407186e4b1d351bc95b24b89c8e1a2570abbcf4cc493747b",
-  "updated_at": "2026-11-26T14:03:37Z",
+  "hash": "212da5aec918219e57a47f714bf4fe8c890e743614f2e8f23a1373625a1d5c76",
+  "updated_at": "2026-11-26T14:04:28Z",
   "packages": {
     "com.summer.chain3": {
       "id": "com.summer.chain3",
@@ -651,6 +651,88 @@
               "deb": "debs/com.summer.xtcontrolcenter_0.0.1-59+01c8db_iphoneos-arm64e.deb",
               "size": 101018,
               "sha256": "c413a57d89c51781fe8969c9a47d9643103ab061a70f70e5b97ce279477c5861"
+            }
+          }
+        }
+      ]
+    },
+    "com.summer.xtdeviceevents": {
+      "id": "com.summer.xtdeviceevents",
+      "name": "XTDeviceEvents",
+      "current_version": "0.0.1-2+70577a",
+      "base_version": "0.0.1",
+      "hash": "a512b016866e8447ec8d843adc09e9c5c31b09b1c430af66fc3400b8cd497aa3",
+      "section": "Tweaks",
+      "description": "A jailbreak tweak built with xtheos",
+      "author": "cu",
+      "maintainer": "cu",
+      "has_framework": false,
+      "has_skills": false,
+      "release_notes": "# XTDeviceEvents 1.0.0\n\n## 新功能\n- 接入 xtheos v1.0 打包与多源规范，支持三环境（rootful / rootless / roothide）统一本地打包与开发源发布\n\n## 改进\n- 升级 3 个 DEBIAN/control（Name 继承、Author、X-XTheos-Env、X-XTheos-Build）与两层 vendor 搜索路径\n- 锁定部署版本为 iOS 14.0 并补充 .gitignore 规则\n\n## 修复\n- 无\n\n## 升级与兼容性\n- 最低系统部署版本锁定为 iOS 14.0，兼容 rootful / rootless / roothide 全环境",
+      "environments": {
+        "rootful": {
+          "arch": "iphoneos-arm",
+          "depends": [
+            "mobilesubstrate"
+          ],
+          "deb": "debs/com.summer.xtdeviceevents_0.0.1-2+70577a_iphoneos-arm.deb",
+          "size": 5912,
+          "sha256": "8f20c02a09e6bec2ccc24322d55f01a12ec6a915b70c00952dce9b34b592786a"
+        },
+        "rootless": {
+          "arch": "iphoneos-arm64",
+          "depends": [
+            "ellekit"
+          ],
+          "deb": "debs/com.summer.xtdeviceevents_0.0.1-2+70577a_iphoneos-arm64.deb",
+          "size": 5934,
+          "sha256": "a8e61e539aed29b597d76e3c5f9e62fcd83e0f514408d878b3cf7453d5ce4d5e"
+        },
+        "roothide": {
+          "arch": "iphoneos-arm64e",
+          "depends": [
+            "ellekit"
+          ],
+          "deb": "debs/com.summer.xtdeviceevents_0.0.1-2+70577a_iphoneos-arm64e.deb",
+          "size": 5908,
+          "sha256": "53f6b53f8638e5cb7e1e1142b26ccf1f8caab5e04cae53ee25d376c6156b1a11"
+        }
+      },
+      "versions": [
+        {
+          "version": "0.0.1-2+70577a",
+          "base_version": "0.0.1",
+          "hash": "a512b016866e8447ec8d843adc09e9c5c31b09b1c430af66fc3400b8cd497aa3",
+          "release_notes": "# XTDeviceEvents 1.0.0\n\n## 新功能\n- 接入 xtheos v1.0 打包与多源规范，支持三环境（rootful / rootless / roothide）统一本地打包与开发源发布\n\n## 改进\n- 升级 3 个 DEBIAN/control（Name 继承、Author、X-XTheos-Env、X-XTheos-Build）与两层 vendor 搜索路径\n- 锁定部署版本为 iOS 14.0 并补充 .gitignore 规则\n\n## 修复\n- 无\n\n## 升级与兼容性\n- 最低系统部署版本锁定为 iOS 14.0，兼容 rootful / rootless / roothide 全环境",
+          "has_framework": false,
+          "has_skills": false,
+          "environments": {
+            "rootful": {
+              "arch": "iphoneos-arm",
+              "depends": [
+                "mobilesubstrate"
+              ],
+              "deb": "debs/com.summer.xtdeviceevents_0.0.1-2+70577a_iphoneos-arm.deb",
+              "size": 5912,
+              "sha256": "8f20c02a09e6bec2ccc24322d55f01a12ec6a915b70c00952dce9b34b592786a"
+            },
+            "rootless": {
+              "arch": "iphoneos-arm64",
+              "depends": [
+                "ellekit"
+              ],
+              "deb": "debs/com.summer.xtdeviceevents_0.0.1-2+70577a_iphoneos-arm64.deb",
+              "size": 5934,
+              "sha256": "a8e61e539aed29b597d76e3c5f9e62fcd83e0f514408d878b3cf7453d5ce4d5e"
+            },
+            "roothide": {
+              "arch": "iphoneos-arm64e",
+              "depends": [
+                "ellekit"
+              ],
+              "deb": "debs/com.summer.xtdeviceevents_0.0.1-2+70577a_iphoneos-arm64e.deb",
+              "size": 5908,
+              "sha256": "53f6b53f8638e5cb7e1e1142b26ccf1f8caab5e04cae53ee25d376c6156b1a11"
             }
           }
         }
