@@ -3,8 +3,8 @@
   "name": "xtheos",
   "description": "xtheos harness 源(com.summer.xtheos)",
   "keep_versions": 4,
-  "hash": "9b7ec5249fa45c393acde66c2cf0df29bac490f343d2f6cb209f5005eaca5ca9",
-  "updated_at": "2026-11-26T14:01:18Z",
+  "hash": "df24581579e0179b407186e4b1d351bc95b24b89c8e1a2570abbcf4cc493747b",
+  "updated_at": "2026-11-26T14:03:37Z",
   "packages": {
     "com.summer.chain3": {
       "id": "com.summer.chain3",
@@ -551,6 +551,106 @@
               "deb": "debs/com.summer.xtcommand_1.0-1+fdf08a_iphoneos-arm64e.deb",
               "size": 888010,
               "sha256": "296309f5ce4cb7095821ca2686e2eeda1d73eaf24413289969418bb3c9888903"
+            }
+          }
+        }
+      ]
+    },
+    "com.summer.xtcontrolcenter": {
+      "id": "com.summer.xtcontrolcenter",
+      "name": "XTControlCenter",
+      "current_version": "0.0.1-59+01c8db",
+      "base_version": "0.0.1",
+      "hash": "1c8d38f7e3a4fa5759dd7d0383b28f4a6482bbc71ef42c22b5c756305d7d3c61",
+      "section": "Utilities",
+      "description": "A jailbreak package (a command-line tool, a Control Center module, a jailbreak tweak) built with xtheos",
+      "author": "cu",
+      "maintainer": "cu",
+      "has_framework": false,
+      "has_skills": false,
+      "release_notes": "# XTControlCenter 0.0.1\n\n## 新功能\n- 接入 xtheos v1.0 打包与多源规范，支持三环境（rootful / rootless / roothide）统一本地打包与开发源发布\n\n## 改进\n- 升级全部 6 个 DEBIAN/control 模板（Name 继承、Author、X-XTheos-Env、X-XTheos-Build）\n- 统一工程部署版本与 .gitignore 规则\n\n## 修复\n- 无\n\n## 升级与兼容性\n- 最低系统部署版本锁定为 iOS 14.0，兼容 rootful / rootless / roothide 全环境",
+      "environments": {
+        "rootful": {
+          "arch": "iphoneos-arm",
+          "depends": [
+            "com.summer.conduit (>= 0.2.0)",
+            "com.summer.remotecanvas (>= 1.0.0)",
+            "mobilesubstrate",
+            "com.opa334.ccsupport"
+          ],
+          "deb": "debs/com.summer.xtcontrolcenter_0.0.1-59+01c8db_iphoneos-arm.deb",
+          "size": 101012,
+          "sha256": "1cb391dd088a93f911733f89e23d73ee0678d7279ab84a3f8c2a7b1ab0107b87"
+        },
+        "rootless": {
+          "arch": "iphoneos-arm64",
+          "depends": [
+            "com.summer.conduit (>= 0.2.0)",
+            "com.summer.remotecanvas (>= 1.0.0)",
+            "ellekit",
+            "com.opa334.ccsupport"
+          ],
+          "deb": "debs/com.summer.xtcontrolcenter_0.0.1-59+01c8db_iphoneos-arm64.deb",
+          "size": 101052,
+          "sha256": "825b051f7bfec61622e8e896acd60a865bb25dd9aa528c0a332af77baf7e030c"
+        },
+        "roothide": {
+          "arch": "iphoneos-arm64e",
+          "depends": [
+            "com.summer.conduit (>= 0.2.0)",
+            "com.summer.remotecanvas (>= 1.0.0)",
+            "ellekit",
+            "com.opa334.ccsupport"
+          ],
+          "deb": "debs/com.summer.xtcontrolcenter_0.0.1-59+01c8db_iphoneos-arm64e.deb",
+          "size": 101018,
+          "sha256": "c413a57d89c51781fe8969c9a47d9643103ab061a70f70e5b97ce279477c5861"
+        }
+      },
+      "versions": [
+        {
+          "version": "0.0.1-59+01c8db",
+          "base_version": "0.0.1",
+          "hash": "1c8d38f7e3a4fa5759dd7d0383b28f4a6482bbc71ef42c22b5c756305d7d3c61",
+          "release_notes": "# XTControlCenter 0.0.1\n\n## 新功能\n- 接入 xtheos v1.0 打包与多源规范，支持三环境（rootful / rootless / roothide）统一本地打包与开发源发布\n\n## 改进\n- 升级全部 6 个 DEBIAN/control 模板（Name 继承、Author、X-XTheos-Env、X-XTheos-Build）\n- 统一工程部署版本与 .gitignore 规则\n\n## 修复\n- 无\n\n## 升级与兼容性\n- 最低系统部署版本锁定为 iOS 14.0，兼容 rootful / rootless / roothide 全环境",
+          "has_framework": false,
+          "has_skills": false,
+          "environments": {
+            "rootful": {
+              "arch": "iphoneos-arm",
+              "depends": [
+                "com.summer.conduit (>= 0.2.0)",
+                "com.summer.remotecanvas (>= 1.0.0)",
+                "mobilesubstrate",
+                "com.opa334.ccsupport"
+              ],
+              "deb": "debs/com.summer.xtcontrolcenter_0.0.1-59+01c8db_iphoneos-arm.deb",
+              "size": 101012,
+              "sha256": "1cb391dd088a93f911733f89e23d73ee0678d7279ab84a3f8c2a7b1ab0107b87"
+            },
+            "rootless": {
+              "arch": "iphoneos-arm64",
+              "depends": [
+                "com.summer.conduit (>= 0.2.0)",
+                "com.summer.remotecanvas (>= 1.0.0)",
+                "ellekit",
+                "com.opa334.ccsupport"
+              ],
+              "deb": "debs/com.summer.xtcontrolcenter_0.0.1-59+01c8db_iphoneos-arm64.deb",
+              "size": 101052,
+              "sha256": "825b051f7bfec61622e8e896acd60a865bb25dd9aa528c0a332af77baf7e030c"
+            },
+            "roothide": {
+              "arch": "iphoneos-arm64e",
+              "depends": [
+                "com.summer.conduit (>= 0.2.0)",
+                "com.summer.remotecanvas (>= 1.0.0)",
+                "ellekit",
+                "com.opa334.ccsupport"
+              ],
+              "deb": "debs/com.summer.xtcontrolcenter_0.0.1-59+01c8db_iphoneos-arm64e.deb",
+              "size": 101018,
+              "sha256": "c413a57d89c51781fe8969c9a47d9643103ab061a70f70e5b97ce279477c5861"
             }
           }
         }
