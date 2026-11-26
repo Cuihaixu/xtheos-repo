@@ -3,8 +3,8 @@
   "name": "xtheos",
   "description": "xtheos harness 源(com.summer.xtheos)",
   "keep_versions": 4,
-  "hash": "41f7cb1e124b78471f017f5b9867bcb2b93764d88b77b6bce39af85d63043f63",
-  "updated_at": "2026-11-26T14:09:47Z",
+  "hash": "315a6acfbfb802bf30166fa1a69718c552f1c34a274d2e437cdc4d4265b31d12",
+  "updated_at": "2026-11-26T14:20:55Z",
   "packages": {
     "com.summer.chain3": {
       "id": "com.summer.chain3",
@@ -202,46 +202,83 @@
     "com.summer.conduit": {
       "id": "com.summer.conduit",
       "name": "Conduit",
-      "current_version": "0.2.3-8+414fde",
-      "base_version": "0.2.3",
-      "hash": "bf31319cdf4f99311d1fe1d158fa8abc604b8c24d00f19eded8fd124584067dc",
+      "current_version": "0.2.4-3+16f806",
+      "base_version": "0.2.4",
+      "hash": "dd094b295ab83fe31d6794d84afd4db95fa8c4a50a88393f34924d854e494c26",
       "section": "System",
       "description": "A jailbreak package (a background daemon, a dynamic library, a jailbreak tweak) built with xtheos",
       "author": "cu",
       "maintainer": "cu",
       "has_framework": true,
       "has_skills": false,
-      "release_notes": "# Conduit 0.2.3\n\n## 新功能\n- 适配 xtheos 1.0.0 规范，支持 rootful、rootless、roothide 三越狱环境全架构（arm64 / arm64e）自动出包与编译壳导出。\n- 单条消息载荷上限提升至 10MB，偏好存储单值上限提升至 1MB、单域上限提升至 10MB。\n\n## 改进\n- 守护进程与服务组件全面升级为原生 Xcode 多产物构建系统，支持目标依赖自动解析与符号防丢。\n- 完善三环境动态库编译壳（Conduit.framework、Conduit.tbd、头文件与导出符号）。\n\n## 修复\n- 修复复杂并发通信场景下服务端连接断开重连时状态不同步的问题。\n- 修复多 Target 组合出包时架构矩阵缺失的隐患。\n\n## 升级与兼容性\n- 向下兼容所有既有 Conduit 客户端 API，上层组件（如 harness）可直接无缝链接。",
+      "release_notes": "# Conduit 0.2.4\n\n## 新功能\n- 接入 xtheos v1.0 打包与多源规范，统一导出三环境（rootful / rootless / roothide）成品包与通用 vendor 编译桩\n\n## 改进\n- 基于 origin/main (0.2.4) 统一迁移两层 vendor 搜索路径、5 级包信息继承与 6 个 DEBIAN/control（Name 继承、Author、X-XTheos-Env、X-XTheos-Build）\n- 锁定部署版本为 iOS 14.0\n\n## 修复\n- 无\n\n## 升级与兼容性\n- 最低系统部署版本锁定为 iOS 14.0，兼容 rootful / rootless / roothide 全环境",
       "environments": {
         "rootful": {
           "arch": "iphoneos-arm",
           "depends": [
             "mobilesubstrate"
           ],
-          "deb": "debs/com.summer.conduit_0.2.3-8+414fde_iphoneos-arm.deb",
-          "size": 281162,
-          "sha256": "62da24693d87e34d8506077d2d0adff6e14d4e45a7b6effcb9640dad7f41c02e"
+          "deb": "debs/com.summer.conduit_0.2.4-3+16f806_iphoneos-arm.deb",
+          "size": 283984,
+          "sha256": "c41bb13070f759054ad1c4615219897a49cda121acaa9ab7253181a781ac82c0"
         },
         "rootless": {
           "arch": "iphoneos-arm64",
           "depends": [
             "ellekit"
           ],
-          "deb": "debs/com.summer.conduit_0.2.3-8+414fde_iphoneos-arm64.deb",
-          "size": 281192,
-          "sha256": "54241aa0c374d549e82e676e67d6317507c828d42a052639ea4de7292e924f7e"
+          "deb": "debs/com.summer.conduit_0.2.4-3+16f806_iphoneos-arm64.deb",
+          "size": 284020,
+          "sha256": "fd0b4da80fa444b331cc860b25bc197d759b305902c52f2b3ece154022a8d69f"
         },
         "roothide": {
           "arch": "iphoneos-arm64e",
           "depends": [
             "ellekit"
           ],
-          "deb": "debs/com.summer.conduit_0.2.3-8+414fde_iphoneos-arm64e.deb",
-          "size": 281170,
-          "sha256": "deb99498cb4ca6ec5ab907148e8a691a1619964fce3bb7d713fcc9ee4476b963"
+          "deb": "debs/com.summer.conduit_0.2.4-3+16f806_iphoneos-arm64e.deb",
+          "size": 284002,
+          "sha256": "27be2f6b52564db5231efb46faf2e2e9d6ac243b4654ed0ca6840146f9ae87dc"
         }
       },
       "versions": [
+        {
+          "version": "0.2.4-3+16f806",
+          "base_version": "0.2.4",
+          "hash": "dd094b295ab83fe31d6794d84afd4db95fa8c4a50a88393f34924d854e494c26",
+          "release_notes": "# Conduit 0.2.4\n\n## 新功能\n- 接入 xtheos v1.0 打包与多源规范，统一导出三环境（rootful / rootless / roothide）成品包与通用 vendor 编译桩\n\n## 改进\n- 基于 origin/main (0.2.4) 统一迁移两层 vendor 搜索路径、5 级包信息继承与 6 个 DEBIAN/control（Name 继承、Author、X-XTheos-Env、X-XTheos-Build）\n- 锁定部署版本为 iOS 14.0\n\n## 修复\n- 无\n\n## 升级与兼容性\n- 最低系统部署版本锁定为 iOS 14.0，兼容 rootful / rootless / roothide 全环境",
+          "has_framework": true,
+          "has_skills": false,
+          "environments": {
+            "rootful": {
+              "arch": "iphoneos-arm",
+              "depends": [
+                "mobilesubstrate"
+              ],
+              "deb": "debs/com.summer.conduit_0.2.4-3+16f806_iphoneos-arm.deb",
+              "size": 283984,
+              "sha256": "c41bb13070f759054ad1c4615219897a49cda121acaa9ab7253181a781ac82c0"
+            },
+            "rootless": {
+              "arch": "iphoneos-arm64",
+              "depends": [
+                "ellekit"
+              ],
+              "deb": "debs/com.summer.conduit_0.2.4-3+16f806_iphoneos-arm64.deb",
+              "size": 284020,
+              "sha256": "fd0b4da80fa444b331cc860b25bc197d759b305902c52f2b3ece154022a8d69f"
+            },
+            "roothide": {
+              "arch": "iphoneos-arm64e",
+              "depends": [
+                "ellekit"
+              ],
+              "deb": "debs/com.summer.conduit_0.2.4-3+16f806_iphoneos-arm64e.deb",
+              "size": 284002,
+              "sha256": "27be2f6b52564db5231efb46faf2e2e9d6ac243b4654ed0ca6840146f9ae87dc"
+            }
+          }
+        },
         {
           "version": "0.2.3-8+414fde",
           "base_version": "0.2.3",
