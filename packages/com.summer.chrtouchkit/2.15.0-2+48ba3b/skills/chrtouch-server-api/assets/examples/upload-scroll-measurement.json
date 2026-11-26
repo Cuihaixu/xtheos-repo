@@ -1,0 +1,14 @@
+{
+  "schema": "chr.network-scroll-measurement/v1",
+  "measurement": {
+    "deviceModel": "iPhone10,2",
+    "screenPoints": { "w": 414, "h": 736 },
+    "screenScale": 3,
+    "osVersion": "16.7.16",
+    "mode": "vertical",
+    "samples": [
+      { "dx": 0, "dy": 1460, "durationMs": 1180, "measuredAt": 1793764800000 },
+      { "dx": 0, "dy": 1502, "durationMs": 1210, "measuredAt": 1793764803000 }
+    ]
+  }
+}
