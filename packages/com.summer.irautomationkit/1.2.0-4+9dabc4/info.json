@@ -1,0 +1,76 @@
+{
+  "format": 1,
+  "name": "IRAutomationKit",
+  "id": "com.summer.irautomationkit",
+  "package": "com.summer.irautomationkit",
+  "version": "1.2.0-4+9dabc4",
+  "base_version": "1.2.0",
+  "build": "4+9dabc4",
+  "type": "dynamic",
+  "section": "Utilities",
+  "envs": [
+    "rootful",
+    "rootless",
+    "roothide"
+  ],
+  "author": "cu",
+  "authors": "cu",
+  "maintainer": "cu",
+  "description": "A jailbreak package (a command-line tool, a dynamic library) built with xtheos",
+  "depends": "com.summer.iremotekit (>= 1.5.0), com.summer.chrtouchkit (>= 2.11.0), com.summer.conduit (>= 0.2.0), com.summer.remotecanvas (>= 1.0.0), mobilesubstrate",
+  "git_commit": "9dcc45",
+  "built_at": "2026-11-26T14:42:40Z",
+  "origin": {
+    "kind": "dist",
+    "from": "/Users/cu/Documents/Reverse/ios-tools/IRAutomationKit-migrate",
+    "commit": "82aa5ea-dirty",
+    "machine": "cu-cu-Mac-mini-035059",
+    "time": "2026-11-26T14:42:40Z"
+  },
+  "install_name": "/usr/lib/IRAutomationKit.framework/IRAutomationKit",
+  "hash": "6276555c285106f52fbc76761d105efbc22f4539756bf27e8c4054ac7551a26d",
+  "has_framework": true,
+  "has_skills": true,
+  "release_notes": "# IRAutomationKit 1.0.0\n\n## 新功能\n- 接入 xtheos v1.0 打包与多源规范，统一导出三环境（rootful / rootless / roothide）成品包与通用 vendor 编译桩\n\n## 改进\n- 移除废弃的 IRAutomationKit-mac Target，统一使用两层 vendor 搜索路径与 5 级包信息继承\n- 升级 3 个 DEBIAN/control（Name 继承、Author、X-XTheos-Env、X-XTheos-Build）并锁定部署版本为 iOS 14.0\n\n## 修复\n- 无\n\n## 升级与兼容性\n- 最低系统部署版本锁定为 iOS 14.0，兼容 rootful / rootless / roothide 全环境",
+  "environments": {
+    "rootful": {
+      "arch": "iphoneos-arm",
+      "depends": [
+        "com.summer.iremotekit (>= 1.5.0)",
+        "com.summer.chrtouchkit (>= 2.11.0)",
+        "com.summer.conduit (>= 0.2.0)",
+        "com.summer.remotecanvas (>= 1.0.0)",
+        "mobilesubstrate"
+      ],
+      "deb": "debs/com.summer.irautomationkit_1.2.0-4+9dabc4_iphoneos-arm.deb",
+      "size": 1534902,
+      "sha256": "d2b3871bc47a321f722aba2929238f374760b43d28fbd9181ba8ff554892d878"
+    },
+    "rootless": {
+      "arch": "iphoneos-arm64",
+      "depends": [
+        "com.summer.iremotekit (>= 1.5.0)",
+        "com.summer.chrtouchkit (>= 2.11.0)",
+        "com.summer.conduit (>= 0.2.0)",
+        "com.summer.remotecanvas (>= 1.0.0)",
+        "ellekit"
+      ],
+      "deb": "debs/com.summer.irautomationkit_1.2.0-4+9dabc4_iphoneos-arm64.deb",
+      "size": 1534920,
+      "sha256": "f8c657370baf4cf38b64634520a677468cc67155be184e0287cdb489881d2176"
+    },
+    "roothide": {
+      "arch": "iphoneos-arm64e",
+      "depends": [
+        "com.summer.iremotekit (>= 1.5.0)",
+        "com.summer.chrtouchkit (>= 2.11.0)",
+        "com.summer.conduit (>= 0.2.0)",
+        "com.summer.remotecanvas (>= 1.0.0)",
+        "ellekit"
+      ],
+      "deb": "debs/com.summer.irautomationkit_1.2.0-4+9dabc4_iphoneos-arm64e.deb",
+      "size": 1534892,
+      "sha256": "9692390a6c7a954a8e391cea6edebecf8d6aea1072d9271a3174c19a74c97953"
+    }
+  }
+}

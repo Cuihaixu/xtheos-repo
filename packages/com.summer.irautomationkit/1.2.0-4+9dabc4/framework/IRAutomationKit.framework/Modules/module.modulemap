@@ -1,0 +1,6 @@
+framework module IRAutomationKit {
+  umbrella header "IRAutomationKit.h"
+  export *
+
+  module * { export * }
+}
