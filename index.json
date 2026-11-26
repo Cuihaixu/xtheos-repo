@@ -3,8 +3,8 @@
   "name": "xtheos",
   "description": "xtheos harness 源(com.summer.xtheos)",
   "keep_versions": 4,
-  "hash": "74deea1e87802b97e0e050873c086f7bdfc6e9e96e599c562596aa015a5a81d5",
-  "updated_at": "2026-11-26T14:24:08Z",
+  "hash": "3bcc402b27e4b04a97f29f032491f15f39886fa0565c6a8ab68a82e2e49a930d",
+  "updated_at": "2026-11-26T14:39:02Z",
   "packages": {
     "com.summer.chain3": {
       "id": "com.summer.chain3",
@@ -194,6 +194,118 @@
               "deb": "debs/com.summer.chain3_0.0.1-6+5cb371_iphoneos-arm64e.deb",
               "size": 4794,
               "sha256": "1ac33c3ea98d4ebb40074dd4f0763bff2444f3d6a8b2d3b17fc81cd427eea2ff"
+            }
+          }
+        }
+      ]
+    },
+    "com.summer.chrtouchkit": {
+      "id": "com.summer.chrtouchkit",
+      "name": "CHRTouchKit-dynamic",
+      "current_version": "2.15.0-1+92152c",
+      "base_version": "2.15.0",
+      "hash": "403a251dfae19296d0e637c63e51912e160cab5e72b8b751dca3c94412026370",
+      "section": "Applications",
+      "description": "A jailbreak package (a root app, a command-line tool, a dynamic library, a jailbreak tweak) built with xtheos",
+      "author": "cu",
+      "maintainer": "cu",
+      "has_framework": true,
+      "has_skills": true,
+      "release_notes": "# CHRTouchKit 2.15.0\n\n## 新功能\n- 接入 xtheos v1.0 打包与多源规范，统一导出三环境（rootful / rootless / roothide）成品包与通用 vendor 编译桩\n\n## 改进\n- 移除废弃的 CHRTouchKit-dynamic-mac / CHRTouchKit-static-mac Target，统一使用两层 vendor 搜索路径与 5 级包信息继承\n- 升级 3 个 DEBIAN/control（Name 继承、Author、X-XTheos-Env、X-XTheos-Build）并锁定部署版本为 iOS 14.0\n\n## 修复\n- 无\n\n## 升级与兼容性\n- 最低系统部署版本锁定为 iOS 14.0，兼容 rootful / rootless / roothide 全环境",
+      "environments": {
+        "rootful": {
+          "arch": "iphoneos-arm",
+          "depends": [
+            "com.summer.remotecanvas (>= 1.1.0)",
+            "com.summer.conduit (>= 0.1.0)",
+            "com.summer.conduit (>= 1.0.0)",
+            "com.summer.remotecanvas (>= 1.0.0)",
+            "com.summer.xtcommand (>= 1.0.0)",
+            "mobilesubstrate"
+          ],
+          "deb": "debs/com.summer.chrtouchkit_2.15.0-1+92152c_iphoneos-arm.deb",
+          "size": 2357072,
+          "sha256": "1a037d38af54734517c2e6528d083f8f9d6349e35c0038a8c949391757f41906"
+        },
+        "rootless": {
+          "arch": "iphoneos-arm64",
+          "depends": [
+            "com.summer.remotecanvas (>= 1.1.0)",
+            "com.summer.conduit (>= 0.1.0)",
+            "com.summer.conduit (>= 1.0.0)",
+            "com.summer.remotecanvas (>= 1.0.0)",
+            "com.summer.xtcommand (>= 1.0.0)",
+            "ellekit"
+          ],
+          "deb": "debs/com.summer.chrtouchkit_2.15.0-1+92152c_iphoneos-arm64.deb",
+          "size": 2357188,
+          "sha256": "ebc8e295181cc607a380baa7171800d055f27b02eba159d6e6e9a8017456c867"
+        },
+        "roothide": {
+          "arch": "iphoneos-arm64e",
+          "depends": [
+            "com.summer.remotecanvas (>= 1.1.0)",
+            "com.summer.conduit (>= 0.1.0)",
+            "com.summer.conduit (>= 1.0.0)",
+            "com.summer.remotecanvas (>= 1.0.0)",
+            "com.summer.xtcommand (>= 1.0.0)",
+            "ellekit"
+          ],
+          "deb": "debs/com.summer.chrtouchkit_2.15.0-1+92152c_iphoneos-arm64e.deb",
+          "size": 2357066,
+          "sha256": "ee0cf6fd7497470191273f6f2fe60a041f26da12050effad13f397e8994ab243"
+        }
+      },
+      "versions": [
+        {
+          "version": "2.15.0-1+92152c",
+          "base_version": "2.15.0",
+          "hash": "403a251dfae19296d0e637c63e51912e160cab5e72b8b751dca3c94412026370",
+          "release_notes": "# CHRTouchKit 2.15.0\n\n## 新功能\n- 接入 xtheos v1.0 打包与多源规范，统一导出三环境（rootful / rootless / roothide）成品包与通用 vendor 编译桩\n\n## 改进\n- 移除废弃的 CHRTouchKit-dynamic-mac / CHRTouchKit-static-mac Target，统一使用两层 vendor 搜索路径与 5 级包信息继承\n- 升级 3 个 DEBIAN/control（Name 继承、Author、X-XTheos-Env、X-XTheos-Build）并锁定部署版本为 iOS 14.0\n\n## 修复\n- 无\n\n## 升级与兼容性\n- 最低系统部署版本锁定为 iOS 14.0，兼容 rootful / rootless / roothide 全环境",
+          "has_framework": true,
+          "has_skills": true,
+          "environments": {
+            "rootful": {
+              "arch": "iphoneos-arm",
+              "depends": [
+                "com.summer.remotecanvas (>= 1.1.0)",
+                "com.summer.conduit (>= 0.1.0)",
+                "com.summer.conduit (>= 1.0.0)",
+                "com.summer.remotecanvas (>= 1.0.0)",
+                "com.summer.xtcommand (>= 1.0.0)",
+                "mobilesubstrate"
+              ],
+              "deb": "debs/com.summer.chrtouchkit_2.15.0-1+92152c_iphoneos-arm.deb",
+              "size": 2357072,
+              "sha256": "1a037d38af54734517c2e6528d083f8f9d6349e35c0038a8c949391757f41906"
+            },
+            "rootless": {
+              "arch": "iphoneos-arm64",
+              "depends": [
+                "com.summer.remotecanvas (>= 1.1.0)",
+                "com.summer.conduit (>= 0.1.0)",
+                "com.summer.conduit (>= 1.0.0)",
+                "com.summer.remotecanvas (>= 1.0.0)",
+                "com.summer.xtcommand (>= 1.0.0)",
+                "ellekit"
+              ],
+              "deb": "debs/com.summer.chrtouchkit_2.15.0-1+92152c_iphoneos-arm64.deb",
+              "size": 2357188,
+              "sha256": "ebc8e295181cc607a380baa7171800d055f27b02eba159d6e6e9a8017456c867"
+            },
+            "roothide": {
+              "arch": "iphoneos-arm64e",
+              "depends": [
+                "com.summer.remotecanvas (>= 1.1.0)",
+                "com.summer.conduit (>= 0.1.0)",
+                "com.summer.conduit (>= 1.0.0)",
+                "com.summer.remotecanvas (>= 1.0.0)",
+                "com.summer.xtcommand (>= 1.0.0)",
+                "ellekit"
+              ],
+              "deb": "debs/com.summer.chrtouchkit_2.15.0-1+92152c_iphoneos-arm64e.deb",
+              "size": 2357066,
+              "sha256": "ee0cf6fd7497470191273f6f2fe60a041f26da12050effad13f397e8994ab243"
             }
           }
         }

@@ -1,0 +1,64 @@
+{
+  "schema": "chr.network-library-create/v2",
+  "library": {
+    "name": "抖音常用手势",
+    "bundleId": "com.ss.iphone.ugc.Aweme",
+    "icon": {
+      "kind": 3,
+      "mediaType": "image/png",
+      "dataBase64": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII="
+    }
+  },
+  "tree": {
+    "rootIds": ["local-category-a"],
+    "nodes": {
+      "local-category-a": {
+        "type": "category",
+        "nodeId": "local-category-a",
+        "name": "浏览",
+        "childIds": ["local-group-a"]
+      },
+      "local-group-a": {
+        "type": "record",
+        "nodeId": "local-group-a",
+        "name": "上滑",
+        "parentId": "local-category-a",
+        "recordIds": ["local-record-a"],
+        "groupKind": "single",
+        "typeSignature": ["interval"]
+      }
+    }
+  },
+  "records": [
+    {
+      "recordId": "local-record-a",
+      "meta": {
+        "displayName": "上滑",
+        "userTags": [],
+        "savedAt": 1786334400000,
+        "durationNs": 1000000000,
+        "screenPoints": { "w": 414, "h": 736 },
+        "screenScale": 3,
+        "orientation": 0,
+        "targetBundleIds": ["com.ss.iphone.ugc.Aweme"]
+      },
+      "segments": [
+        { "type": "interval", "durationNs": 1000000000 }
+      ]
+    }
+  ],
+  "playbackPlans": [
+    {
+      "kind": "default",
+      "name": "默认方案",
+      "alias": "",
+      "targetGroupId": "local-group-a",
+      "plan": {
+        "schema": "chr.playback-plan/v1",
+        "match": { "required": [] },
+        "selection": { "kind": "random" },
+        "replay": { "mode": "configId", "configId": "default" }
+      }
+    }
+  ]
+}
