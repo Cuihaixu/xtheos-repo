@@ -1,0 +1,5 @@
+863c7fd0f810bbc88cd6dbf67b9f4424f208409f9f37d0703fb54e2d583de117  RELEASE_NOTES.md
+561e5de8ea3ed25a30ec9dff80bc9feeeb3f7d2e10aa4c24b8994db8194435af  debs/com.summer.xtheos_1.0.0-25+8b5228_iphoneos-arm.deb
+da5646a22d2426dd51d3bf6b108b356ca17cac87e23c5633fe6115c81ede47bd  debs/com.summer.xtheos_1.0.0-25+8b5228_iphoneos-arm64.deb
+0a741e7e6d7e4447b907a140b93668a55aa357adc79b399cf5592d0fac8b1ebf  debs/com.summer.xtheos_1.0.0-25+8b5228_iphoneos-arm64e.deb
+1bb33014d419e2a381bba1facf7a6d9a7b42bf14fb31aed1ef3365876708ee76  info.json
