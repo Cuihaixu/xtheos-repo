@@ -3,8 +3,8 @@
   "name": "xtheos",
   "description": "xtheos harness 源(com.summer.xtheos)",
   "keep_versions": 4,
-  "hash": "80c0f91c7bc21832b3f6c0296b5265dd5390cd45a4175ebc2fe34d93b5dc263f",
-  "updated_at": "2026-11-26T13:57:54Z",
+  "hash": "9b7ec5249fa45c393acde66c2cf0df29bac490f343d2f6cb209f5005eaca5ca9",
+  "updated_at": "2026-11-26T14:01:18Z",
   "packages": {
     "com.summer.chain3": {
       "id": "com.summer.chain3",
@@ -440,46 +440,83 @@
     "com.summer.xtcommand": {
       "id": "com.summer.xtcommand",
       "name": "XTCommand",
-      "current_version": "1.0-1+fdf08a",
-      "base_version": "1.0",
-      "hash": "2bfc64ff86392fd92809a3079dd306715f5b58139e6e50f547e0850d6b3fbe8d",
-      "section": "Development",
-      "description": "A dynamic library built with xtheos",
+      "current_version": "1.3.0-6+60bc52",
+      "base_version": "1.3.0",
+      "hash": "3f55df3562f7c3df05a938f81279c2e2ed4d656017c29918a64b708aa429eac2",
+      "section": "Utilities",
+      "description": "A jailbreak package (a command-line tool, a dynamic library) built with xtheos",
       "author": "cu",
       "maintainer": "cu",
       "has_framework": true,
       "has_skills": true,
-      "release_notes": "",
+      "release_notes": "# XTCommand 1.3.0\n\n## 新功能\n- 完整接入 xtheos v1.0 打包与多源规范，统一导出三环境（rootful / rootless / roothide）成品包与通用 vendor 编译桩\n\n## 改进\n- 清理废弃的 XTCommand-mac Target，统一使用两层 vendor 搜索路径与 5 级包信息继承\n- 完善 DEBIAN/control 元数据（Name 继承、Author、X-XTheos-Env、X-XTheos-Build）\n\n## 修复\n- 补齐 xtcmd CLI Target 的 arm64/arm64e 双架构配置，修复 rootless/roothide 环境缺 arm64e 切片问题\n\n## 升级与兼容性\n- 最低系统部署版本锁定为 iOS 14.0，兼容 rootful / rootless / roothide 全环境",
       "environments": {
         "rootful": {
           "arch": "iphoneos-arm",
           "depends": [
             "mobilesubstrate"
           ],
-          "deb": "debs/com.summer.xtcommand_1.0-1+fdf08a_iphoneos-arm.deb",
-          "size": 888012,
-          "sha256": "f4a73c080e95d126eaf3e4d9811be81cf6796396ad8f9cc66a377d2f51fb226f"
+          "deb": "debs/com.summer.xtcommand_1.3.0-6+60bc52_iphoneos-arm.deb",
+          "size": 1510332,
+          "sha256": "f55c9c9e0ca47dd59b89a3f53c502b81b2d0fbbc28f7fe2a15e733e5783a6e23"
         },
         "rootless": {
           "arch": "iphoneos-arm64",
           "depends": [
             "ellekit"
           ],
-          "deb": "debs/com.summer.xtcommand_1.0-1+fdf08a_iphoneos-arm64.deb",
-          "size": 888034,
-          "sha256": "0169e4f3587d3a980f5361267bdc6b45b7a0d0c98c7befd2fdd20b25ba941600"
+          "deb": "debs/com.summer.xtcommand_1.3.0-6+60bc52_iphoneos-arm64.deb",
+          "size": 1510380,
+          "sha256": "09fccc5507d0d5d03499fe4dac7417f2bb15e29cbaa47d03501be6cda14285f5"
         },
         "roothide": {
           "arch": "iphoneos-arm64e",
           "depends": [
             "ellekit"
           ],
-          "deb": "debs/com.summer.xtcommand_1.0-1+fdf08a_iphoneos-arm64e.deb",
-          "size": 888010,
-          "sha256": "296309f5ce4cb7095821ca2686e2eeda1d73eaf24413289969418bb3c9888903"
+          "deb": "debs/com.summer.xtcommand_1.3.0-6+60bc52_iphoneos-arm64e.deb",
+          "size": 1510334,
+          "sha256": "44e2b296fc4dd35ab48efffb16067b1bcf93305d7872bce751a277ab249eeec7"
         }
       },
       "versions": [
+        {
+          "version": "1.3.0-6+60bc52",
+          "base_version": "1.3.0",
+          "hash": "3f55df3562f7c3df05a938f81279c2e2ed4d656017c29918a64b708aa429eac2",
+          "release_notes": "# XTCommand 1.3.0\n\n## 新功能\n- 完整接入 xtheos v1.0 打包与多源规范，统一导出三环境（rootful / rootless / roothide）成品包与通用 vendor 编译桩\n\n## 改进\n- 清理废弃的 XTCommand-mac Target，统一使用两层 vendor 搜索路径与 5 级包信息继承\n- 完善 DEBIAN/control 元数据（Name 继承、Author、X-XTheos-Env、X-XTheos-Build）\n\n## 修复\n- 补齐 xtcmd CLI Target 的 arm64/arm64e 双架构配置，修复 rootless/roothide 环境缺 arm64e 切片问题\n\n## 升级与兼容性\n- 最低系统部署版本锁定为 iOS 14.0，兼容 rootful / rootless / roothide 全环境",
+          "has_framework": true,
+          "has_skills": true,
+          "environments": {
+            "rootful": {
+              "arch": "iphoneos-arm",
+              "depends": [
+                "mobilesubstrate"
+              ],
+              "deb": "debs/com.summer.xtcommand_1.3.0-6+60bc52_iphoneos-arm.deb",
+              "size": 1510332,
+              "sha256": "f55c9c9e0ca47dd59b89a3f53c502b81b2d0fbbc28f7fe2a15e733e5783a6e23"
+            },
+            "rootless": {
+              "arch": "iphoneos-arm64",
+              "depends": [
+                "ellekit"
+              ],
+              "deb": "debs/com.summer.xtcommand_1.3.0-6+60bc52_iphoneos-arm64.deb",
+              "size": 1510380,
+              "sha256": "09fccc5507d0d5d03499fe4dac7417f2bb15e29cbaa47d03501be6cda14285f5"
+            },
+            "roothide": {
+              "arch": "iphoneos-arm64e",
+              "depends": [
+                "ellekit"
+              ],
+              "deb": "debs/com.summer.xtcommand_1.3.0-6+60bc52_iphoneos-arm64e.deb",
+              "size": 1510334,
+              "sha256": "44e2b296fc4dd35ab48efffb16067b1bcf93305d7872bce751a277ab249eeec7"
+            }
+          }
+        },
         {
           "version": "1.0-1+fdf08a",
           "base_version": "1.0",

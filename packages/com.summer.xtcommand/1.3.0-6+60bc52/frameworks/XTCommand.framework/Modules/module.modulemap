@@ -1,0 +1,8 @@
+framework module XTCommand {
+    umbrella header "XTCommand.h"
+    // CLI11.hpp 是 C++ 头文件:OC 用户 @import / #import <XTCommand/XTCommand.h> 时不带它;
+    // C++ 用户在 .cpp / .mm 里显式 #include <XTCommand/CLI11.hpp>。
+    exclude header "CLI11.hpp"
+    export *
+    module * { export * }
+}
