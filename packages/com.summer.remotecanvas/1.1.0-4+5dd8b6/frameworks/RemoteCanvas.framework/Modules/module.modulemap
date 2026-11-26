@@ -1,0 +1,6 @@
+framework module RemoteCanvas {
+  umbrella header "RemoteCanvas.h"
+  export *
+
+  module * { export * }
+}

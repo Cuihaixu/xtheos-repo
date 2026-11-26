@@ -1,0 +1,67 @@
+{
+  "format": 1,
+  "name": "RemoteCanvas",
+  "id": "com.summer.remotecanvas",
+  "package": "com.summer.remotecanvas",
+  "version": "1.1.0-4+5dd8b6",
+  "base_version": "1.1.0",
+  "build": "4+5dd8b6",
+  "type": "dynamic",
+  "section": "System",
+  "envs": [
+    "rootful",
+    "rootless",
+    "roothide"
+  ],
+  "author": "cu",
+  "authors": "cu",
+  "maintainer": "cu",
+  "description": "全局透明画板：任意进程可把内容显示在所有 App 之上，触摸完全穿透（远程绘制 + 弹窗 / Toast / HUD）",
+  "depends": "com.summer.conduit (>= 0.2.2), mobilesubstrate",
+  "git_commit": "7058ba",
+  "built_at": "2026-11-26T14:09:46Z",
+  "origin": {
+    "kind": "dist",
+    "from": "/Users/cu/Documents/Reverse/ios-tools/RemoteCanvas-migrate",
+    "commit": "4febf21-dirty",
+    "machine": "cu-cu-Mac-mini-035059",
+    "time": "2026-11-26T14:09:46Z"
+  },
+  "install_name": "/usr/lib/RemoteCanvas.framework/RemoteCanvas",
+  "hash": "5a815f2cd2da73db3e324e0b6dfb92ebd4cae1d0e469ce322e77970af3ad3053",
+  "has_framework": true,
+  "has_skills": false,
+  "release_notes": "# RemoteCanvas 1.1.0\n\n## 新功能\n- 接入 xtheos v1.0 打包与多源规范，统一导出三环境（rootful / rootless / roothide）成品包与通用 vendor 编译桩\n\n## 改进\n- 移除废弃的 RemoteCanvas-mac Target，统一使用两层 vendor 搜索路径与 5 级包信息继承\n- 升级全部 6 个 DEBIAN/control（Name 继承、Author、X-XTheos-Env、X-XTheos-Build）并锁定部署版本为 iOS 14.0\n\n## 修复\n- 无\n\n## 升级与兼容性\n- 最低系统部署版本锁定为 iOS 14.0，兼容 rootful / rootless / roothide 全环境",
+  "environments": {
+    "rootful": {
+      "arch": "iphoneos-arm",
+      "depends": [
+        "com.summer.conduit (>= 0.2.2)",
+        "mobilesubstrate"
+      ],
+      "deb": "debs/com.summer.remotecanvas_1.1.0-4+5dd8b6_iphoneos-arm.deb",
+      "size": 377546,
+      "sha256": "0a9915ec149e15d4b921a9645d5f78b6eace36b5cc99be73d5f43ae711cc1ef3"
+    },
+    "rootless": {
+      "arch": "iphoneos-arm64",
+      "depends": [
+        "com.summer.conduit (>= 0.2.2)",
+        "ellekit"
+      ],
+      "deb": "debs/com.summer.remotecanvas_1.1.0-4+5dd8b6_iphoneos-arm64.deb",
+      "size": 377552,
+      "sha256": "1f70899764cf7e133b998a4c635d14bd7f784ab22c97bb8c31a51c4dddaaeb50"
+    },
+    "roothide": {
+      "arch": "iphoneos-arm64e",
+      "depends": [
+        "com.summer.conduit (>= 0.2.2)",
+        "ellekit"
+      ],
+      "deb": "debs/com.summer.remotecanvas_1.1.0-4+5dd8b6_iphoneos-arm64e.deb",
+      "size": 377546,
+      "sha256": "443feb7f1eab89c2ff1b7cfa91f04be21472a1b07c67225f5ca1b0424aceb521"
+    }
+  }
+}
