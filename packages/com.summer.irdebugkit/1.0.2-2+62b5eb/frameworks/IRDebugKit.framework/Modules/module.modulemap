@@ -1,0 +1,6 @@
+framework module IRDebugKit {
+  umbrella header "IRDebugKit.h"
+  export *
+
+  module * { export * }
+}

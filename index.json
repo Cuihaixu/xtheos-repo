@@ -3,8 +3,8 @@
   "name": "xtheos",
   "description": "xtheos harness 源(com.summer.xtheos)",
   "keep_versions": 4,
-  "hash": "e1ca14a13329fa89e27895e6ab828b314a106150210b689ceccecdacf9749f7f",
-  "updated_at": "2026-11-26T14:42:41Z",
+  "hash": "d8a943e4ca015b2c19fa68f083f9f3143f80fb29bde8b10f0581878b175167d3",
+  "updated_at": "2026-11-26T14:42:57Z",
   "packages": {
     "com.summer.chain3": {
       "id": "com.summer.chain3",
@@ -739,6 +739,112 @@
               "deb": "debs/com.summer.irautomationkit_1.2.0-4+9dabc4_iphoneos-arm64e.deb",
               "size": 1534892,
               "sha256": "9692390a6c7a954a8e391cea6edebecf8d6aea1072d9271a3174c19a74c97953"
+            }
+          }
+        }
+      ]
+    },
+    "com.summer.irdebugkit": {
+      "id": "com.summer.irdebugkit",
+      "name": "IRDebugKit",
+      "current_version": "1.0.2-2+62b5eb",
+      "base_version": "1.0.2",
+      "hash": "1e9e7cee99a15058f0a9ce4a6937f24b807dc6732ccf784bc2cc262192758f6b",
+      "section": "Utilities",
+      "description": "A jailbreak package (a command-line tool, a dynamic library) built with xtheos",
+      "author": "cu",
+      "maintainer": "cu",
+      "has_framework": true,
+      "has_skills": false,
+      "release_notes": "# IRDebugKit 1.0.0\n\n## 新功能\n- 接入 xtheos v1.0 打包与多源规范，统一导出三环境（rootful / rootless / roothide）成品包与通用 vendor 编译桩\n\n## 改进\n- 移除废弃的 IRDebugKit-mac Target，统一使用两层 vendor 搜索路径与 5 级包信息继承\n- 升级 3 个 DEBIAN/control（Name 继承、Author、X-XTheos-Env、X-XTheos-Build）并锁定部署版本为 iOS 14.0\n\n## 修复\n- 无\n\n## 升级与兼容性\n- 最低系统部署版本锁定为 iOS 14.0，兼容 rootful / rootless / roothide 全环境",
+      "environments": {
+        "rootful": {
+          "arch": "iphoneos-arm",
+          "depends": [
+            "com.summer.irautomationkit",
+            "com.summer.iremotekit",
+            "com.summer.xtcommand",
+            "com.summer.chrtouchkit (>= 2.11.0)",
+            "mobilesubstrate"
+          ],
+          "deb": "debs/com.summer.irdebugkit_1.0.2-2+62b5eb_iphoneos-arm.deb",
+          "size": 12426,
+          "sha256": "bf6d78a74296c21b3d8f75f79a7970322cb2a607734b33744b466ac94efc5923"
+        },
+        "rootless": {
+          "arch": "iphoneos-arm64",
+          "depends": [
+            "com.summer.irautomationkit",
+            "com.summer.iremotekit",
+            "com.summer.xtcommand",
+            "com.summer.chrtouchkit (>= 2.11.0)",
+            "ellekit"
+          ],
+          "deb": "debs/com.summer.irdebugkit_1.0.2-2+62b5eb_iphoneos-arm64.deb",
+          "size": 12444,
+          "sha256": "523407a8ff1c3ff14df415f1a091d4f035149c2a92187937092329b29b126855"
+        },
+        "roothide": {
+          "arch": "iphoneos-arm64e",
+          "depends": [
+            "com.summer.irautomationkit",
+            "com.summer.iremotekit",
+            "com.summer.xtcommand",
+            "com.summer.chrtouchkit (>= 2.11.0)",
+            "ellekit"
+          ],
+          "deb": "debs/com.summer.irdebugkit_1.0.2-2+62b5eb_iphoneos-arm64e.deb",
+          "size": 12418,
+          "sha256": "99dbdee8ebe87a9e8fd90a387ce260a5e175a1864c4dd00314aacda376ea98dc"
+        }
+      },
+      "versions": [
+        {
+          "version": "1.0.2-2+62b5eb",
+          "base_version": "1.0.2",
+          "hash": "1e9e7cee99a15058f0a9ce4a6937f24b807dc6732ccf784bc2cc262192758f6b",
+          "release_notes": "# IRDebugKit 1.0.0\n\n## 新功能\n- 接入 xtheos v1.0 打包与多源规范，统一导出三环境（rootful / rootless / roothide）成品包与通用 vendor 编译桩\n\n## 改进\n- 移除废弃的 IRDebugKit-mac Target，统一使用两层 vendor 搜索路径与 5 级包信息继承\n- 升级 3 个 DEBIAN/control（Name 继承、Author、X-XTheos-Env、X-XTheos-Build）并锁定部署版本为 iOS 14.0\n\n## 修复\n- 无\n\n## 升级与兼容性\n- 最低系统部署版本锁定为 iOS 14.0，兼容 rootful / rootless / roothide 全环境",
+          "has_framework": true,
+          "has_skills": false,
+          "environments": {
+            "rootful": {
+              "arch": "iphoneos-arm",
+              "depends": [
+                "com.summer.irautomationkit",
+                "com.summer.iremotekit",
+                "com.summer.xtcommand",
+                "com.summer.chrtouchkit (>= 2.11.0)",
+                "mobilesubstrate"
+              ],
+              "deb": "debs/com.summer.irdebugkit_1.0.2-2+62b5eb_iphoneos-arm.deb",
+              "size": 12426,
+              "sha256": "bf6d78a74296c21b3d8f75f79a7970322cb2a607734b33744b466ac94efc5923"
+            },
+            "rootless": {
+              "arch": "iphoneos-arm64",
+              "depends": [
+                "com.summer.irautomationkit",
+                "com.summer.iremotekit",
+                "com.summer.xtcommand",
+                "com.summer.chrtouchkit (>= 2.11.0)",
+                "ellekit"
+              ],
+              "deb": "debs/com.summer.irdebugkit_1.0.2-2+62b5eb_iphoneos-arm64.deb",
+              "size": 12444,
+              "sha256": "523407a8ff1c3ff14df415f1a091d4f035149c2a92187937092329b29b126855"
+            },
+            "roothide": {
+              "arch": "iphoneos-arm64e",
+              "depends": [
+                "com.summer.irautomationkit",
+                "com.summer.iremotekit",
+                "com.summer.xtcommand",
+                "com.summer.chrtouchkit (>= 2.11.0)",
+                "ellekit"
+              ],
+              "deb": "debs/com.summer.irdebugkit_1.0.2-2+62b5eb_iphoneos-arm64e.deb",
+              "size": 12418,
+              "sha256": "99dbdee8ebe87a9e8fd90a387ce260a5e175a1864c4dd00314aacda376ea98dc"
             }
           }
         }
