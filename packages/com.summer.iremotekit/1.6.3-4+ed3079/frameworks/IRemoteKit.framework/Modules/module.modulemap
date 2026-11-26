@@ -1,0 +1,18 @@
+framework module IRemoteKit {
+  umbrella header "IRemoteKit.h"
+  export *
+  module * { export * }
+
+  // 工具/能力层:opt-in 子模块,默认伞不含;`#import <IRemoteKit/IRToolkit.h>` / `@import IRemoteKit.Toolkit;` 才拿。
+  explicit module Toolkit {
+    header "IRToolkit.h"
+    header "IRDebugOptions.h"
+    header "IRObject+Debug.h"
+    header "IRObjectScan.h"
+    header "IRHook.h"
+    header "IRTrace.h"
+    header "IRWatchPoint.h"
+    header "IRWatchPointManager.h"
+    export *
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "format": 1,
+  "name": "IRemoteKit",
+  "id": "com.summer.iremotekit",
+  "package": "com.summer.iremotekit",
+  "version": "1.6.3-4+ed3079",
+  "base_version": "1.6.3",
+  "build": "4+ed3079",
+  "type": "dynamic",
+  "section": "Utilities",
+  "envs": [
+    "rootful",
+    "rootless",
+    "roothide"
+  ],
+  "author": "cu",
+  "authors": "cu",
+  "maintainer": "cu",
+  "description": "A jailbreak package (a command-line tool, a dynamic library) built with xtheos",
+  "depends": "com.summer.xtcommand (>= 1.0.0), mobilesubstrate",
+  "git_commit": "4b1e6c",
+  "built_at": "2026-11-26T14:24:07Z",
+  "origin": {
+    "kind": "dist",
+    "from": "/Users/cu/Documents/Reverse/ios-tools/IRemoteKit-migrate",
+    "commit": "6cb0152-dirty",
+    "machine": "cu-cu-Mac-mini-035059",
+    "time": "2026-11-26T14:24:07Z"
+  },
+  "install_name": "/usr/lib/IRemoteKit.framework/IRemoteKit",
+  "hash": "a83a00397005484cb5785836e998d4ea9f9f05dcb1233692fe06c9b698990346",
+  "has_framework": true,
+  "has_skills": false,
+  "release_notes": "# IRemoteKit 1.6.3\n\n## 新功能\n- 接入 xtheos v1.0 打包与多源规范，统一导出三环境（rootful / rootless / roothide）成品包与通用 vendor 编译桩\n\n## 改进\n- 移除废弃的 IRemoteKit-mac Target，统一使用两层 vendor 搜索路径与 5 级包信息继承\n- 升级 3 个 DEBIAN/control（Name 继承、Author、X-XTheos-Env、X-XTheos-Build）并锁定部署版本为 iOS 14.0\n\n## 修复\n- 无\n\n## 升级与兼容性\n- 最低系统部署版本锁定为 iOS 14.0，兼容 rootful / rootless / roothide 全环境",
+  "environments": {
+    "rootful": {
+      "arch": "iphoneos-arm",
+      "depends": [
+        "com.summer.xtcommand (>= 1.0.0)",
+        "mobilesubstrate"
+      ],
+      "deb": "debs/com.summer.iremotekit_1.6.3-4+ed3079_iphoneos-arm.deb",
+      "size": 787770,
+      "sha256": "1f6f749fe86dfc4c7481b9829c6eb06bedb335ff83d902c0e9c4344ddf0a4a46"
+    },
+    "rootless": {
+      "arch": "iphoneos-arm64",
+      "depends": [
+        "com.summer.xtcommand (>= 1.0.0)",
+        "ellekit"
+      ],
+      "deb": "debs/com.summer.iremotekit_1.6.3-4+ed3079_iphoneos-arm64.deb",
+      "size": 787826,
+      "sha256": "55fdfb20003103089c31d3fc6929789e917d84b4e8ed9b40ccd26a4be5e7069c"
+    },
+    "roothide": {
+      "arch": "iphoneos-arm64e",
+      "depends": [
+        "com.summer.xtcommand (>= 1.0.0)",
+        "ellekit"
+      ],
+      "deb": "debs/com.summer.iremotekit_1.6.3-4+ed3079_iphoneos-arm64e.deb",
+      "size": 787766,
+      "sha256": "7cc7d25801de3f5152eb2fceb832faadc86c3c68821d81c0f39b824fef34b33b"
+    }
+  }
+}
