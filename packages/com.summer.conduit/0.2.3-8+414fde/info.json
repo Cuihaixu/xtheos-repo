@@ -1,0 +1,64 @@
+{
+  "format": 1,
+  "name": "Conduit",
+  "id": "com.summer.conduit",
+  "package": "com.summer.conduit",
+  "version": "0.2.3-8+414fde",
+  "base_version": "0.2.3",
+  "build": "8+414fde",
+  "type": "dynamic",
+  "section": "System",
+  "envs": [
+    "rootful",
+    "rootless",
+    "roothide"
+  ],
+  "author": "cu",
+  "authors": "cu",
+  "maintainer": "cu",
+  "description": "A jailbreak package (a background daemon, a dynamic library, a jailbreak tweak) built with xtheos",
+  "depends": "mobilesubstrate",
+  "git_commit": "fac62e",
+  "built_at": "2026-11-26T13:57:53Z",
+  "origin": {
+    "kind": "dist",
+    "from": "/Users/cu/Documents/Reverse/ios-tools/Conduit-migrate/Conduit",
+    "commit": "e092cb0-dirty",
+    "machine": "cu-cu-Mac-mini-035059",
+    "time": "2026-11-26T13:57:53Z"
+  },
+  "install_name": "/usr/lib/Conduit.framework/Conduit",
+  "hash": "bf31319cdf4f99311d1fe1d158fa8abc604b8c24d00f19eded8fd124584067dc",
+  "has_framework": true,
+  "has_skills": false,
+  "release_notes": "# Conduit 0.2.3\n\n## 新功能\n- 适配 xtheos 1.0.0 规范，支持 rootful、rootless、roothide 三越狱环境全架构（arm64 / arm64e）自动出包与编译壳导出。\n- 单条消息载荷上限提升至 10MB，偏好存储单值上限提升至 1MB、单域上限提升至 10MB。\n\n## 改进\n- 守护进程与服务组件全面升级为原生 Xcode 多产物构建系统，支持目标依赖自动解析与符号防丢。\n- 完善三环境动态库编译壳（Conduit.framework、Conduit.tbd、头文件与导出符号）。\n\n## 修复\n- 修复复杂并发通信场景下服务端连接断开重连时状态不同步的问题。\n- 修复多 Target 组合出包时架构矩阵缺失的隐患。\n\n## 升级与兼容性\n- 向下兼容所有既有 Conduit 客户端 API，上层组件（如 harness）可直接无缝链接。",
+  "environments": {
+    "rootful": {
+      "arch": "iphoneos-arm",
+      "depends": [
+        "mobilesubstrate"
+      ],
+      "deb": "debs/com.summer.conduit_0.2.3-8+414fde_iphoneos-arm.deb",
+      "size": 281162,
+      "sha256": "62da24693d87e34d8506077d2d0adff6e14d4e45a7b6effcb9640dad7f41c02e"
+    },
+    "rootless": {
+      "arch": "iphoneos-arm64",
+      "depends": [
+        "ellekit"
+      ],
+      "deb": "debs/com.summer.conduit_0.2.3-8+414fde_iphoneos-arm64.deb",
+      "size": 281192,
+      "sha256": "54241aa0c374d549e82e676e67d6317507c828d42a052639ea4de7292e924f7e"
+    },
+    "roothide": {
+      "arch": "iphoneos-arm64e",
+      "depends": [
+        "ellekit"
+      ],
+      "deb": "debs/com.summer.conduit_0.2.3-8+414fde_iphoneos-arm64e.deb",
+      "size": 281170,
+      "sha256": "deb99498cb4ca6ec5ab907148e8a691a1619964fce3bb7d713fcc9ee4476b963"
+    }
+  }
+}

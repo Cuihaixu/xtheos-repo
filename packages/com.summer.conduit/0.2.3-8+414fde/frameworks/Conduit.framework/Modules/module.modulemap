@@ -1,0 +1,6 @@
+framework module Conduit {
+  umbrella header "Conduit.h"
+  export *
+
+  module * { export * }
+}
