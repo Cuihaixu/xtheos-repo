@@ -1,0 +1,23 @@
+{
+  "schema": "chr.network-record-create/v1",
+  "record": {
+    "recordId": "F5A6B7C8-9D0E-4F1A-2B3C-4D5E6F7A8B9C",
+    "meta": {
+      "displayName": "上滑",
+      "userTags": [],
+      "savedAt": 1786334400000,
+      "durationNs": 1000000000,
+      "screenPoints": { "w": 414, "h": 736 },
+      "screenScale": 3,
+      "orientation": 0,
+      "targetBundleIds": ["com.ss.iphone.ugc.Aweme"]
+    },
+    "segments": [
+      { "type": "interval", "durationNs": 1000000000 }
+    ]
+  },
+  "groupConstraint": {
+    "expectedGroupKind": "single",
+    "recordTypeSignature": ["interval"]
+  }
+}

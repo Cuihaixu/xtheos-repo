@@ -1,0 +1,6 @@
+framework module CHRTouchKit {
+  umbrella header "CHRTouchKit.h"
+  export *
+
+  module * { export * }
+}

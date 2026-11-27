@@ -1,0 +1,1273 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Touch Kit Network Library API",
+    "version": "1.0.0",
+    "description": "Touch Kit 网络库对外 API 机器可读契约。人类可读契约见同目录 network-library.md（唯一现行契约）。涵盖健康检查、列表、变更、Snapshot、手势记录读写、滚动距离测量上传、回放方案、创建网络库导入。【版本号说明】本契约没有版本概念，这就是当前唯一设计：URL 里的 /v1 是服务端自己的挂载前缀（在用户配置的 Base URL 内），不是本契约版本，也不存在 /v2 路径；JSON schema 字段里的 chr.xxx/vN（如 chr.network-library-snapshot/v2）是线格式标识常量，末尾 /vN 只是各常量的固定字面值，服务端按契约逐字原样下发，不要统一或升降级。recordId、nodeId、planId 一律为大写 UUID（与本地 NSUUID.UUID.UUIDString 及 planId 一致），禁止 record-、node- 等任何前缀。内网协议，不使用 Bearer Token、API Key、OAuth 或其他身份认证；changeToken 是按 API Base URL 隔离的不透明同步游标，不是鉴权凭证。",
+    "license": { "name": "Proprietary", "identifier": "LicenseRef-Proprietary" }
+  },
+  "security": [],
+  "servers": [
+    {
+      "url": "http://aweme.rapp.lan/v1",
+      "description": "示例 API Base URL；客户端保留并使用其中的 /v1 挂载路径"
+    }
+  ],
+  "paths": {
+    "/health": {
+      "get": {
+        "operationId": "getHealth",
+        "summary": "健康检查",
+        "responses": {
+          "200": {
+            "description": "服务可用",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HealthResponse" },
+                "example": { "schema": "chr.network-health/v1", "status": "ok" }
+              }
+            }
+          },
+          "500": { "$ref": "#/components/responses/InternalError" }
+        }
+      }
+    },
+    "/network-libraries": {
+      "get": {
+        "operationId": "listNetworkLibraries",
+        "summary": "获取网络库列表",
+        "description": "返回服务端全部网络库摘要。该接口没有 bundleId 查询参数。",
+        "responses": {
+          "200": {
+            "description": "网络库列表",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/LibraryListResponse" }
+              }
+            }
+          },
+          "500": { "$ref": "#/components/responses/InternalError" }
+        }
+      },
+      "post": {
+        "operationId": "createNetworkLibrary",
+        "summary": "创建网络库",
+        "parameters": [
+          { "$ref": "#/components/parameters/IdempotencyKey" }
+        ],
+        "requestBody": {
+          "required": true,
+          "description": "完整导入包，最大 16 MiB。请求中的 Node/Record ID 仅作为包内临时引用；服务端必须重新生成全部最终 ID 并重写引用。",
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/CreateLibraryRequest" }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "网络库已创建",
+            "headers": {
+              "Location": {
+                "description": "新网络库 Snapshot 的 absolute-path reference，例如 /v1/network-libraries/lib-a/snapshot",
+                "schema": { "type": "string" }
+              },
+              "ETag": {
+                "description": "新网络库的 quoted revision",
+                "schema": { "type": "string" }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/SnapshotResponse" }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "409": { "$ref": "#/components/responses/Conflict" },
+          "413": { "$ref": "#/components/responses/PayloadTooLarge" },
+          "422": { "$ref": "#/components/responses/UnprocessableEntity" },
+          "500": { "$ref": "#/components/responses/InternalError" }
+        }
+      }
+    },
+    "/network-libraries/changes": {
+      "get": {
+        "operationId": "listNetworkLibraryChanges",
+        "summary": "获取网络库变化",
+        "parameters": [
+          {
+            "name": "since",
+            "in": "query",
+            "required": true,
+            "description": "服务端之前为同一 API Base URL 返回，且在完整同步成功后保存的不透明 changeToken。客户端不得自行生成初始值。",
+            "schema": { "type": "string", "minLength": 1 },
+            "example": "ct_123"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "变更清单",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ChangesResponse" }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "410": {
+            "description": "同步游标已过期，客户端需要重新获取列表和 snapshot",
+            "headers": {
+              "X-Request-Id": { "$ref": "#/components/headers/RequestId" }
+            },
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ErrorResponse" }
+              }
+            }
+          },
+          "500": { "$ref": "#/components/responses/InternalError" }
+        }
+      }
+    },
+    "/network-libraries/{serverLibraryId}/snapshot": {
+      "get": {
+        "operationId": "getNetworkLibrarySnapshot",
+        "summary": "获取网络库完整 snapshot",
+        "parameters": [
+          { "$ref": "#/components/parameters/ServerLibraryId" },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "required": false,
+            "description": "已缓存的 quoted revision",
+            "schema": { "type": "string" },
+            "example": "\"18\""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "完整 snapshot",
+            "headers": {
+              "ETag": {
+                "description": "quoted revision",
+                "schema": { "type": "string" }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/SnapshotResponse" }
+              }
+            }
+          },
+          "304": { "description": "snapshot 没有变化；无响应体" },
+          "404": { "$ref": "#/components/responses/LibraryNotFound" },
+          "500": { "$ref": "#/components/responses/InternalError" }
+        }
+      }
+    },
+    "/network-libraries/{serverLibraryId}/records/{recordId}": {
+      "get": {
+        "operationId": "getNetworkRecord",
+        "summary": "下载完整 record",
+        "parameters": [
+          { "$ref": "#/components/parameters/ServerLibraryId" },
+          { "$ref": "#/components/parameters/RecordId" }
+        ],
+        "responses": {
+          "200": {
+            "description": "完整 CHRGestureRecord",
+            "headers": {
+              "ETag": {
+                "description": "quoted record SHA-256",
+                "schema": { "type": "string" }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/GestureRecord" }
+              }
+            }
+          },
+          "404": { "$ref": "#/components/responses/RecordNotFound" },
+          "500": { "$ref": "#/components/responses/InternalError" }
+        }
+      },
+      "delete": {
+        "operationId": "deleteNetworkRecord",
+        "summary": "删除 record",
+        "parameters": [
+          { "$ref": "#/components/parameters/ServerLibraryId" },
+          { "$ref": "#/components/parameters/RecordId" }
+        ],
+        "responses": {
+          "204": { "description": "Record 已删除或原本不存在；无响应体。重复删除不会再次递增 revision 或 changeToken。" },
+          "404": { "$ref": "#/components/responses/LibraryNotFound" },
+          "500": { "$ref": "#/components/responses/InternalError" }
+        }
+      }
+    },
+    "/network-libraries/{serverLibraryId}/records/{recordId}/scroll-measurements": {
+      "put": {
+        "operationId": "uploadScrollMeasurement",
+        "summary": "上传一条滚动距离测量结果",
+        "description": "把一轮新测试追加到该记录 meta.scrollMeasurements 中「deviceModel + screenPoints（四舍五入取整）」项的 modes[mode].samples（没有就新建），只留最后 10 个（按服务端收到的先后），按截断后的样本逐字段重算 min / max / avg；更新该项 screenScale、osVersion。任何客户端都可上传；不带 X-CHR-Device-UDID，记录内不得写入任何设备 UDID。与其它写操作同一事务：更新记录、重算该记录 JCS SHA-256、递增库 revision、推进 changeToken；recordId 不变。幂等范围为 Method + Path + Idempotency-Key，重放不重复追加。",
+        "parameters": [
+          { "$ref": "#/components/parameters/ServerLibraryId" },
+          { "$ref": "#/components/parameters/RecordId" },
+          { "$ref": "#/components/parameters/IdempotencyKey" }
+        ],
+        "requestBody": {
+          "required": true,
+          "description": "一条测量结果，最大 64 KiB。",
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/UploadScrollMeasurementRequest" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "已写入",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/UploadScrollMeasurementResponse" }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "404": { "$ref": "#/components/responses/NotFound" },
+          "409": { "$ref": "#/components/responses/Conflict" },
+          "413": { "$ref": "#/components/responses/PayloadTooLarge" },
+          "422": { "$ref": "#/components/responses/ScrollMeasurementUnprocessable" },
+          "500": { "$ref": "#/components/responses/InternalError" }
+        }
+      }
+    },
+    "/network-libraries/{serverLibraryId}/record-groups/{nodeId}/records": {
+      "post": {
+        "operationId": "createNetworkRecord",
+        "summary": "向记录组新增 record",
+        "parameters": [
+          { "$ref": "#/components/parameters/ServerLibraryId" },
+          {
+            "name": "nodeId",
+            "in": "path",
+            "required": true,
+            "description": "目标记录组节点 ID",
+            "schema": { "type": "string", "minLength": 1 }
+          },
+          { "$ref": "#/components/parameters/IdempotencyKey" }
+        ],
+        "requestBody": {
+          "required": true,
+          "description": "待新增的完整 Gesture Record，最大 2 MiB。请求 recordId 是提交 ID，服务端在成功响应中返回最终 ID。",
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/CreateRecordRequest" }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "record 已创建",
+            "headers": {
+              "Location": {
+                "description": "新 Record 的 absolute-path reference，例如 /v1/network-libraries/lib-a/records/record-a",
+                "schema": { "type": "string" }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/CreateRecordResponse" }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "404": { "$ref": "#/components/responses/NotFound" },
+          "409": { "$ref": "#/components/responses/Conflict" },
+          "413": { "$ref": "#/components/responses/PayloadTooLarge" },
+          "422": { "$ref": "#/components/responses/UnprocessableEntity" },
+          "500": { "$ref": "#/components/responses/InternalError" }
+        }
+      }
+    },
+    "/network-libraries/{serverLibraryId}/record-groups/{recordGroupId}/playback-plans": {
+      "post": {
+        "operationId": "createPlaybackPlan",
+        "summary": "创建自定义回放方案",
+        "description": "在指定记录组下创建 kind=custom 回放方案。请求不得携带 planId、createdByDeviceUDID、revision 或 target，任一存在返回 422 invalid_playback_plan。planId 由服务端生成大写 UUID；createdByDeviceUDID 由 X-CHR-Device-UDID Header 写入；plan.target 由 URL 目标重写。",
+        "parameters": [
+          { "$ref": "#/components/parameters/ServerLibraryId" },
+          {
+            "name": "recordGroupId",
+            "in": "path",
+            "required": true,
+            "description": "目标记录组节点 ID（大写 UUID）",
+            "schema": { "type": "string", "format": "uuid" }
+          },
+          { "$ref": "#/components/parameters/IdempotencyKey" },
+          { "$ref": "#/components/parameters/DeviceUDID" }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/CreatePlaybackPlanRequest" }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "回放方案已创建",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/PlaybackPlanResult" }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "404": { "$ref": "#/components/responses/RecordGroupNotFound" },
+          "409": { "$ref": "#/components/responses/PlaybackPlanConflict" },
+          "422": { "$ref": "#/components/responses/PlaybackPlanUnprocessable" },
+          "500": { "$ref": "#/components/responses/InternalError" }
+        }
+      }
+    },
+    "/network-libraries/{serverLibraryId}/playback-plans/{planId}": {
+      "put": {
+        "operationId": "updatePlaybackPlan",
+        "summary": "更新自定义回放方案",
+        "description": "更新 kind=custom 回放方案。仅创建设备（createdByDeviceUDID 等于 X-CHR-Device-UDID）可更新，否则 403 playback_plan_owner_required。默认方案的 PUT 一律返回 422 default_playback_plan_protected。请求不得携带 planId、createdByDeviceUDID、revision 或 target，也不得改变目标记录组，否则 422 invalid_playback_plan。",
+        "parameters": [
+          { "$ref": "#/components/parameters/ServerLibraryId" },
+          { "$ref": "#/components/parameters/PlanId" },
+          { "$ref": "#/components/parameters/IdempotencyKey" },
+          { "$ref": "#/components/parameters/DeviceUDID" },
+          { "$ref": "#/components/parameters/IfMatchPlanRevision" }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/CreatePlaybackPlanRequest" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "回放方案已更新",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/PlaybackPlanResult" }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "403": { "$ref": "#/components/responses/PlaybackPlanOwnerRequired" },
+          "404": { "$ref": "#/components/responses/PlaybackPlanNotFound" },
+          "409": { "$ref": "#/components/responses/PlaybackPlanConflict" },
+          "422": { "$ref": "#/components/responses/PlaybackPlanUnprocessable" },
+          "500": { "$ref": "#/components/responses/InternalError" }
+        }
+      },
+      "delete": {
+        "operationId": "deletePlaybackPlan",
+        "summary": "删除自定义回放方案",
+        "description": "删除 kind=custom 回放方案。仅创建设备可删除，否则 403 playback_plan_owner_required。删除默认方案返回 422 default_playback_plan_protected。成功事务同时删除方案、从记录组 playbackPlanIds[] 移除 ID、递增库 revision 并推进 changeToken。",
+        "parameters": [
+          { "$ref": "#/components/parameters/ServerLibraryId" },
+          { "$ref": "#/components/parameters/PlanId" },
+          { "$ref": "#/components/parameters/IdempotencyKey" },
+          { "$ref": "#/components/parameters/DeviceUDID" },
+          { "$ref": "#/components/parameters/IfMatchPlanRevision" }
+        ],
+        "responses": {
+          "204": { "description": "回放方案已删除；无响应体。" },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "403": { "$ref": "#/components/responses/PlaybackPlanOwnerRequired" },
+          "404": { "$ref": "#/components/responses/PlaybackPlanNotFound" },
+          "409": { "$ref": "#/components/responses/PlaybackPlanConflict" },
+          "422": { "$ref": "#/components/responses/PlaybackPlanUnprocessable" },
+          "500": { "$ref": "#/components/responses/InternalError" }
+        }
+      }
+    }
+  },
+  "components": {
+    "headers": {
+      "RequestId": {
+        "description": "请求追踪 ID；必须与响应体 error.requestId 相同",
+        "schema": { "type": "string", "minLength": 1 }
+      }
+    },
+    "parameters": {
+      "ServerLibraryId": {
+        "name": "serverLibraryId",
+        "in": "path",
+        "required": true,
+        "description": "服务端网络库 ID",
+        "schema": { "type": "string", "minLength": 1 }
+      },
+      "RecordId": {
+        "name": "recordId",
+        "in": "path",
+        "required": true,
+        "description": "record ID",
+        "schema": { "type": "string", "minLength": 1 }
+      },
+      "IdempotencyKey": {
+        "name": "Idempotency-Key",
+        "in": "header",
+        "required": true,
+        "description": "写请求幂等键。重试同一次逻辑提交必须复用原 UUID；服务端至少保留结果 24 小时。回放方案写请求的幂等范围额外包含 X-CHR-Device-UDID。",
+        "schema": { "type": "string", "format": "uuid" }
+      },
+      "DeviceUDID": {
+        "name": "X-CHR-Device-UDID",
+        "in": "header",
+        "required": true,
+        "description": "回放方案写请求的所有权 Header，值为当前私有设备稳定 UDID。服务端据此写入 createdByDeviceUDID 并做所有权比对；缺失或格式非法返回 400 invalid_device_udid。",
+        "schema": { "type": "string", "minLength": 1 }
+      },
+      "PlanId": {
+        "name": "planId",
+        "in": "path",
+        "required": true,
+        "description": "回放方案 ID（大写 UUID，全局唯一）",
+        "schema": { "type": "string", "format": "uuid" }
+      },
+      "IfMatchPlanRevision": {
+        "name": "If-Match-Plan-Revision",
+        "in": "header",
+        "required": true,
+        "description": "当前方案 planRevision，更新/删除方案必填。缺失或落后均返回 409 plan_revision_conflict。",
+        "schema": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "responses": {
+      "BadRequest": {
+        "description": "请求格式错误",
+        "headers": {
+          "X-Request-Id": { "$ref": "#/components/headers/RequestId" }
+        },
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "#/components/schemas/ErrorResponse" }
+          }
+        }
+      },
+      "NotFound": {
+        "description": "资源不存在",
+        "headers": {
+          "X-Request-Id": { "$ref": "#/components/headers/RequestId" }
+        },
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "#/components/schemas/ErrorResponse" }
+          }
+        }
+      },
+      "LibraryNotFound": {
+        "description": "网络库不存在；error.code 为 library_not_found",
+        "headers": {
+          "X-Request-Id": { "$ref": "#/components/headers/RequestId" }
+        },
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "#/components/schemas/ErrorResponse" }
+          }
+        }
+      },
+      "RecordNotFound": {
+        "description": "Record 不存在；error.code 为 record_not_found",
+        "headers": {
+          "X-Request-Id": { "$ref": "#/components/headers/RequestId" }
+        },
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "#/components/schemas/ErrorResponse" }
+          }
+        }
+      },
+      "Conflict": {
+        "description": "业务冲突；error.code 为 idempotency_conflict 或 record_already_exists，客户端应向用户展示 error.message",
+        "headers": {
+          "X-Request-Id": { "$ref": "#/components/headers/RequestId" }
+        },
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "#/components/schemas/ErrorResponse" }
+          }
+        }
+      },
+      "UnprocessableEntity": {
+        "description": "模型校验失败",
+        "headers": {
+          "X-Request-Id": { "$ref": "#/components/headers/RequestId" }
+        },
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "#/components/schemas/ErrorResponse" }
+          }
+        }
+      },
+      "PayloadTooLarge": {
+        "description": "请求体超过接口限制；error.code 为 payload_too_large。创建网络库限制 16 MiB，新增 Record 限制 2 MiB，上传滚动距离测量限制 64 KiB。",
+        "headers": {
+          "X-Request-Id": { "$ref": "#/components/headers/RequestId" }
+        },
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "#/components/schemas/ErrorResponse" }
+          }
+        }
+      },
+      "InternalError": {
+        "description": "服务端未预期错误",
+        "headers": {
+          "X-Request-Id": { "$ref": "#/components/headers/RequestId" }
+        },
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "#/components/schemas/ErrorResponse" }
+          }
+        }
+      },
+      "RecordGroupNotFound": {
+        "description": "目标节点不存在或不是 Record Group；error.code 为 record_group_not_found（网络库不存在时为 library_not_found）",
+        "headers": {
+          "X-Request-Id": { "$ref": "#/components/headers/RequestId" }
+        },
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "#/components/schemas/ErrorResponse" }
+          }
+        }
+      },
+      "PlaybackPlanNotFound": {
+        "description": "目标方案不存在；error.code 为 playback_plan_not_found（网络库不存在时为 library_not_found）",
+        "headers": {
+          "X-Request-Id": { "$ref": "#/components/headers/RequestId" }
+        },
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "#/components/schemas/ErrorResponse" }
+          }
+        }
+      },
+      "PlaybackPlanOwnerRequired": {
+        "description": "非创建设备更新或删除方案；error.code 为 playback_plan_owner_required",
+        "headers": {
+          "X-Request-Id": { "$ref": "#/components/headers/RequestId" }
+        },
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "#/components/schemas/ErrorResponse" }
+          }
+        }
+      },
+      "PlaybackPlanConflict": {
+        "description": "方案写冲突；error.code 为 playback_plan_alias_conflict、plan_revision_conflict 或 idempotency_conflict",
+        "headers": {
+          "X-Request-Id": { "$ref": "#/components/headers/RequestId" }
+        },
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "#/components/schemas/ErrorResponse" }
+          }
+        }
+      },
+      "ScrollMeasurementUnprocessable": {
+        "description": "测量结果校验失败；error.code 为 invalid_scroll_measurement",
+        "headers": {
+          "X-Request-Id": { "$ref": "#/components/headers/RequestId" }
+        },
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "#/components/schemas/ErrorResponse" }
+          }
+        }
+      },
+      "PlaybackPlanUnprocessable": {
+        "description": "方案校验失败；error.code 为 invalid_playback_plan、playback_plan_target_invalid 或 default_playback_plan_protected",
+        "headers": {
+          "X-Request-Id": { "$ref": "#/components/headers/RequestId" }
+        },
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "#/components/schemas/ErrorResponse" }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "HealthResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["schema", "status"],
+        "properties": {
+          "schema": { "const": "chr.network-health/v1" },
+          "status": { "const": "ok" }
+        }
+      },
+      "NodeIcon": {
+        "description": "网络 API 图标。kind=3 使用内联标准 PNG；设备本地 dataRef 禁止出现在 API 中。",
+        "oneOf": [
+          { "type": "null" },
+          { "$ref": "#/components/schemas/SymbolIcon" },
+          { "$ref": "#/components/schemas/EmojiIcon" },
+          { "$ref": "#/components/schemas/NetworkImageIcon" },
+          { "$ref": "#/components/schemas/InlineImageIcon" }
+        ]
+      },
+      "SymbolIcon": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["kind", "symbolName"],
+        "properties": {
+          "kind": { "const": 0 },
+          "symbolName": { "type": "string", "minLength": 1 }
+        }
+      },
+      "EmojiIcon": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["kind", "emoji"],
+        "properties": {
+          "kind": { "const": 1 },
+          "emoji": { "type": "string", "minLength": 1 }
+        }
+      },
+      "NetworkImageIcon": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["kind", "url"],
+        "properties": {
+          "kind": { "const": 2 },
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "pattern": "^https?://"
+          }
+        }
+      },
+      "InlineImageIcon": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["kind", "mediaType", "dataBase64"],
+        "properties": {
+          "kind": { "const": 3 },
+          "mediaType": { "const": "image/png" },
+          "dataBase64": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 699052,
+            "contentEncoding": "base64",
+            "contentMediaType": "image/png",
+            "description": "不带 data: 前缀的标准 PNG Base64；解码后不得超过 512 KiB。"
+          }
+        }
+      },
+      "LibrarySummary": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["serverLibraryId", "name", "revision", "updatedAt"],
+        "properties": {
+          "serverLibraryId": { "type": "string", "minLength": 1 },
+          "name": { "type": "string", "minLength": 1 },
+          "bundleId": { "type": "string" },
+          "icon": { "$ref": "#/components/schemas/NodeIcon" },
+          "revision": { "type": "integer", "minimum": 0 },
+          "updatedAt": { "type": "integer", "minimum": 0 }
+        }
+      },
+      "LibraryListResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["schema", "changeToken", "libraries"],
+        "properties": {
+          "schema": { "const": "chr.network-library-list/v1" },
+          "changeToken": { "type": "string", "minLength": 1 },
+          "libraries": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/LibrarySummary" }
+          }
+        }
+      },
+      "ChangedLibrary": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["serverLibraryId", "revision"],
+        "properties": {
+          "serverLibraryId": { "type": "string", "minLength": 1 },
+          "revision": { "type": "integer", "minimum": 0 }
+        }
+      },
+      "ChangesResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["schema", "changeToken", "changed", "deletedServerLibraryIds"],
+        "properties": {
+          "schema": { "const": "chr.network-library-changes/v1" },
+          "changeToken": { "type": "string", "minLength": 1 },
+          "changed": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/ChangedLibrary" }
+          },
+          "deletedServerLibraryIds": {
+            "type": "array",
+            "items": { "type": "string", "minLength": 1 }
+          }
+        }
+      },
+      "LibraryMetadata": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name"],
+        "properties": {
+          "name": { "type": "string", "minLength": 1 },
+          "bundleId": { "type": "string" },
+          "icon": { "$ref": "#/components/schemas/NodeIcon" }
+        }
+      },
+      "LibraryNode": {
+        "oneOf": [
+          { "$ref": "#/components/schemas/CategoryNode" },
+          { "$ref": "#/components/schemas/RecordGroupNode" }
+        ]
+      },
+      "ImportRecordGroupNode": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "创建网络库导入包里的记录组节点。groupKind/typeSignature 由客户端计算并提供，服务端原样存储、不重新计算（typeSignature 项如 interval、swipe_up:f1，末尾 :fN 是手指数后缀，是签名的一部分）。不携带 playbackPlanIds（由顶层 playbackPlans 建立）。nodeId 为包内临时引用，服务端重写为大写 UUID。",
+        "required": ["type", "nodeId", "name", "recordIds", "groupKind", "typeSignature"],
+        "properties": {
+          "type": { "const": "record" },
+          "nodeId": { "type": "string", "minLength": 1 },
+          "name": { "type": "string", "minLength": 1 },
+          "parentId": { "type": "string", "minLength": 1 },
+          "recordIds": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true },
+          "groupKind": { "type": "string", "enum": ["single", "composite"] },
+          "typeSignature": { "type": "array", "items": { "type": "string", "minLength": 1 }, "description": "客户端计算的类型签名（单一组非空、混合组为空数组）；服务端原样存储、不计算。" },
+          "icon": { "$ref": "#/components/schemas/NodeIcon" }
+        }
+      },
+      "ImportLibraryNode": {
+        "oneOf": [
+          { "$ref": "#/components/schemas/CategoryNode" },
+          { "$ref": "#/components/schemas/ImportRecordGroupNode" }
+        ]
+      },
+      "ImportLibraryTree": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "创建网络库导入包的目录树。节点 ID 为包内临时引用，服务端重写为大写 UUID。记录组节点的 groupKind/typeSignature 由客户端计算并提供，服务端原样存储、不重新计算。",
+        "required": ["rootIds", "nodes"],
+        "properties": {
+          "rootIds": { "type": "array", "items": { "type": "string" } },
+          "nodes": { "type": "object", "additionalProperties": { "$ref": "#/components/schemas/ImportLibraryNode" } }
+        }
+      },
+      "CategoryNode": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["type", "nodeId", "name", "childIds"],
+        "properties": {
+          "type": { "const": "category" },
+          "nodeId": { "type": "string", "minLength": 1 },
+          "name": { "type": "string", "minLength": 1 },
+          "parentId": { "type": "string", "minLength": 1 },
+          "childIds": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true },
+          "icon": { "$ref": "#/components/schemas/NodeIcon" }
+        }
+      },
+      "RecordGroupNode": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["type", "nodeId", "name", "recordIds", "groupKind", "typeSignature"],
+        "properties": {
+          "type": { "const": "record" },
+          "nodeId": { "type": "string", "minLength": 1 },
+          "name": { "type": "string", "minLength": 1 },
+          "parentId": { "type": "string", "minLength": 1 },
+          "recordIds": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true },
+          "playbackPlanIds": {
+            "type": "array",
+            "description": "该记录组的回放方案 ID 清单（大写 UUID）。Snapshot 中出现，与 playbackPlans[] 集合一致；创建导入请求 Tree 中不出现。",
+            "items": { "type": "string", "format": "uuid" },
+            "uniqueItems": true
+          },
+          "groupKind": { "type": "string", "enum": ["single", "composite"] },
+          "typeSignature": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+          "icon": { "$ref": "#/components/schemas/NodeIcon" }
+        }
+      },
+      "LibraryTree": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["rootIds", "nodes"],
+        "properties": {
+          "rootIds": { "type": "array", "items": { "type": "string" } },
+          "nodes": {
+            "type": "object",
+            "additionalProperties": { "$ref": "#/components/schemas/LibraryNode" }
+          }
+        }
+      },
+      "RecordDescriptor": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "sha256 是 RFC 8785 JCS(recordObject) 的 SHA-256 小写十六进制值。",
+        "required": ["recordId", "sha256"],
+        "properties": {
+          "recordId": { "type": "string", "format": "uuid", "minLength": 1 },
+          "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+        }
+      },
+      "GestureRecord": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "完整手势记录。网络形态不得包含录屏、缩略图、临时文件或 deviceUDID。",
+        "required": ["recordId", "meta", "segments"],
+        "properties": {
+          "recordId": { "type": "string", "format": "uuid", "minLength": 1 },
+          "meta": { "$ref": "#/components/schemas/GestureRecordMetadata" },
+          "segments": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "oneOf": [
+                { "$ref": "#/components/schemas/GestureSegment" },
+                { "$ref": "#/components/schemas/IntervalSegment" }
+              ]
+            }
+          }
+        }
+      },
+      "GestureRecordMetadata": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["displayName", "userTags", "savedAt", "durationNs", "screenPoints", "screenScale", "orientation", "targetBundleIds"],
+        "properties": {
+          "displayName": { "type": "string" },
+          "userTags": { "type": "array", "items": { "type": "string" } },
+          "serverRecordId": { "type": "string", "minLength": 1 },
+          "syncGroupId": { "type": "string", "minLength": 1 },
+          "savedAt": { "type": "integer", "minimum": 0, "description": "Unix Epoch 毫秒" },
+          "durationNs": { "type": "integer", "minimum": 0, "description": "全部 Segment durationNs 之和" },
+          "screenPoints": { "$ref": "#/components/schemas/ScreenPoints" },
+          "screenScale": { "type": "number", "exclusiveMinimum": 0 },
+          "orientation": { "type": "integer", "enum": [0, 1, 2, 3] },
+          "targetBundleIds": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true },
+          "targetAppVersion": { "type": "string", "minLength": 1 },
+          "scrollMeasurements": {
+            "type": "array",
+            "description": "滚动距离测量结果，每个「机型 + 分辨率」一项，内按画布模式分。由 PUT .../scroll-measurements 写入；新增记录与创建网络库导入时也可能随记录上传，须原样保存。没测过时不出现。",
+            "items": { "$ref": "#/components/schemas/ScrollMeasurement" }
+          }
+        }
+      },
+      "ScrollSample": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "一次测试：回放整条记录后的列表偏移（设计分辨率 pt，带符号：上滑 dy > 0、下滑 dy < 0、左滑 dx > 0、右滑 dx < 0）与用时（发出回放 → 列表最后一次滚动）。",
+        "required": ["dx", "dy", "durationMs", "measuredAt"],
+        "properties": {
+          "dx": { "type": "number" },
+          "dy": { "type": "number" },
+          "durationMs": { "type": "number", "minimum": 0 },
+          "measuredAt": { "type": "integer", "minimum": 0, "description": "设备上报的测量时刻（Unix Epoch 毫秒），只展示，不参与排序" }
+        }
+      },
+      "ScrollStats": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "按 samples 逐字段统计（min / max 取原值，avg 保留 1 位小数）。",
+        "required": ["dx", "dy", "durationMs"],
+        "properties": {
+          "dx": { "type": "number" },
+          "dy": { "type": "number" },
+          "durationMs": { "type": "number", "minimum": 0 }
+        }
+      },
+      "ScrollModeResult": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "某画布模式下的结果：最近 10 次测试（按服务端收到的先后，旧的在前）及其统计。",
+        "required": ["samples", "min", "max", "avg"],
+        "properties": {
+          "samples": { "type": "array", "minItems": 1, "maxItems": 10, "items": { "$ref": "#/components/schemas/ScrollSample" } },
+          "min": { "$ref": "#/components/schemas/ScrollStats" },
+          "max": { "$ref": "#/components/schemas/ScrollStats" },
+          "avg": { "$ref": "#/components/schemas/ScrollStats" }
+        }
+      },
+      "ScrollMeasurement": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "某「机型 + 分辨率」的测量结果（记录 meta.scrollMeasurements 的一项），按画布模式分。定位键 = deviceModel + screenPoints（四舍五入取整）。不得包含任何设备 UDID。",
+        "required": ["deviceModel", "screenPoints", "modes"],
+        "properties": {
+          "deviceModel": { "type": "string", "minLength": 1, "description": "硬件型号，如 iPhone10,2" },
+          "screenPoints": { "$ref": "#/components/schemas/ScreenPoints" },
+          "screenScale": { "type": "number", "exclusiveMinimum": 0 },
+          "osVersion": { "type": "string", "minLength": 1 },
+          "modes": {
+            "type": "object",
+            "additionalProperties": false,
+            "minProperties": 1,
+            "description": "画布模式：vertical 只垂直（dx 恒 0）/ horizontal 只水平（dy 恒 0）/ both 垂直+水平",
+            "properties": {
+              "vertical": { "$ref": "#/components/schemas/ScrollModeResult" },
+              "horizontal": { "$ref": "#/components/schemas/ScrollModeResult" },
+              "both": { "$ref": "#/components/schemas/ScrollModeResult" }
+            }
+          }
+        }
+      },
+      "ScrollMeasurementUpload": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "一轮新测试。服务端追加到对应「机型 + 分辨率」项的 modes[mode].samples，只留最后 10 个并重算统计。",
+        "required": ["deviceModel", "screenPoints", "mode", "samples"],
+        "properties": {
+          "deviceModel": { "type": "string", "minLength": 1 },
+          "screenPoints": { "$ref": "#/components/schemas/ScreenPoints" },
+          "screenScale": { "type": "number", "exclusiveMinimum": 0 },
+          "osVersion": { "type": "string", "minLength": 1 },
+          "mode": { "type": "string", "enum": ["vertical", "horizontal", "both"] },
+          "samples": { "type": "array", "minItems": 1, "maxItems": 10, "items": { "$ref": "#/components/schemas/ScrollSample" } }
+        }
+      },
+      "UploadScrollMeasurementRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["schema", "measurement"],
+        "properties": {
+          "schema": { "const": "chr.network-scroll-measurement/v1" },
+          "measurement": { "$ref": "#/components/schemas/ScrollMeasurementUpload" }
+        }
+      },
+      "UploadScrollMeasurementResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["schema", "serverLibraryId", "recordId", "revision", "changeToken"],
+        "properties": {
+          "schema": { "const": "chr.network-scroll-measurement-result/v1" },
+          "serverLibraryId": { "type": "string" },
+          "recordId": { "type": "string", "format": "uuid" },
+          "revision": { "type": "integer", "minimum": 0, "description": "递增后的库 revision" },
+          "changeToken": { "type": "string", "minLength": 1 }
+        }
+      },
+      "ScreenPoints": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["w", "h"],
+        "properties": {
+          "w": { "type": "number", "exclusiveMinimum": 0 },
+          "h": { "type": "number", "exclusiveMinimum": 0 }
+        }
+      },
+      "IntervalSegment": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["type", "durationNs"],
+        "properties": {
+          "type": { "const": "interval" },
+          "durationNs": { "type": "integer", "minimum": 0 }
+        }
+      },
+      "GestureSegment": {
+        "description": "网络传输形态不允许 deviceUDID。",
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["type", "durationNs", "formatVersion", "trackId", "sampleHz", "maxFingers", "pointCount", "deviceModel", "sourceBundleId", "osVersion", "osBuild", "recordedAt", "strokes"],
+        "properties": {
+          "type": { "const": "gesture" },
+          "durationNs": { "type": "integer", "minimum": 0 },
+          "formatVersion": { "type": "integer", "minimum": 1 },
+          "trackId": { "type": "string", "minLength": 1 },
+          "sampleHz": { "type": "number", "minimum": 0 },
+          "maxFingers": { "type": "integer", "minimum": 1 },
+          "pointCount": { "type": "integer", "minimum": 1 },
+          "deviceModel": { "type": "string" },
+          "sourceBundleId": { "type": "string" },
+          "osVersion": { "type": "string" },
+          "osBuild": { "type": "string" },
+          "recordedAt": { "type": "integer", "minimum": 0, "description": "Unix Epoch 毫秒" },
+          "strokes": {
+            "type": "array",
+            "minItems": 1,
+            "items": { "$ref": "#/components/schemas/GestureStroke" }
+          }
+        }
+      },
+      "GestureStroke": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["fingerID", "points"],
+        "properties": {
+          "fingerID": { "type": "integer", "minimum": 0 },
+          "points": {
+            "type": "array",
+            "minItems": 1,
+            "items": { "$ref": "#/components/schemas/GesturePoint" }
+          }
+        }
+      },
+      "GesturePoint": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["tNs", "phase", "x", "y", "pressure", "majorRadius", "minorRadius"],
+        "properties": {
+          "tNs": { "type": "integer", "minimum": 0 },
+          "phase": { "type": "integer", "enum": [0, 1, 2], "description": "0=Down, 1=Move, 2=Up" },
+          "x": { "type": "number", "minimum": 0, "maximum": 1 },
+          "y": { "type": "number", "minimum": 0, "maximum": 1 },
+          "pressure": { "type": "number", "minimum": -1 },
+          "majorRadius": { "type": "number", "minimum": 0 },
+          "minorRadius": { "type": "number", "minimum": 0 }
+        }
+      },
+      "SnapshotResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["schema", "serverLibraryId", "revision", "library", "tree", "records", "playbackPlans"],
+        "properties": {
+          "schema": { "const": "chr.network-library-snapshot/v2" },
+          "serverLibraryId": { "type": "string", "format": "uuid" },
+          "revision": { "type": "integer", "minimum": 0 },
+          "library": { "$ref": "#/components/schemas/LibraryMetadata" },
+          "tree": { "$ref": "#/components/schemas/LibraryTree" },
+          "records": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/RecordDescriptor" }
+          },
+          "playbackPlans": {
+            "type": "array",
+            "description": "完整回放方案清单。每个 planId 恰好被一个记录组的 playbackPlanIds[] 引用；两侧集合完全一致。",
+            "items": { "$ref": "#/components/schemas/PlaybackPlan" }
+          }
+        }
+      },
+      "CreateRecordRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "record.recordId 只标识客户端本次提交；服务端生成并返回最终 recordId。",
+        "required": ["schema", "record", "groupConstraint"],
+        "properties": {
+          "schema": { "const": "chr.network-record-create/v1" },
+          "record": { "$ref": "#/components/schemas/GestureRecord" },
+          "groupConstraint": {
+            "type": "object",
+            "additionalProperties": false,
+            "description": "记录组的 groupKind/typeSignature 由服务端持有并锁定，客户端对目标组类型的乐观断言，用于提前发现不匹配。网络组类型客户端不能转换：新增记录签名与锁定类型不一致时服务端一律返回 409 record_group_type_mismatch，转换组类型只能由服务端管理端操作。",
+            "required": ["expectedGroupKind", "recordTypeSignature"],
+            "properties": {
+              "expectedGroupKind": { "type": "string", "enum": ["single", "composite"] },
+              "recordTypeSignature": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } }
+            }
+          }
+        }
+      },
+      "CreateRecordResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["schema", "serverLibraryId", "recordId", "revision", "changeToken"],
+        "properties": {
+          "schema": { "const": "chr.network-record-create-result/v1" },
+          "serverLibraryId": { "type": "string" },
+          "recordId": { "type": "string", "format": "uuid" },
+          "revision": { "type": "integer", "minimum": 0 },
+          "changeToken": { "type": "string", "minLength": 1 }
+        }
+      },
+      "CreateLibraryRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "tree、records 和 playbackPlans 中的 ID 是导入包内部临时引用。服务端必须重新生成全部 Node/Record/Plan ID 与 serverLibraryId 并重写引用，从 X-CHR-Device-UDID 写入每个方案的 createdByDeviceUDID，并返回完整 V2 Snapshot。",
+        "required": ["schema", "library", "tree", "records", "playbackPlans"],
+        "properties": {
+          "schema": { "const": "chr.network-library-create/v2" },
+          "library": { "$ref": "#/components/schemas/LibraryMetadata" },
+          "tree": { "$ref": "#/components/schemas/ImportLibraryTree" },
+          "records": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/GestureRecord" }
+          },
+          "playbackPlans": {
+            "type": "array",
+            "description": "每个记录组恰好一个默认方案（kind=default）。targetGroupId 引用请求 Tree 的临时 node ID；plan 是可编辑策略体，不含 target/planId/createdByDeviceUDID/revision。缺失或校验不通过返回 422 invalid_playback_plan（或 invalid_library / invalid_record）。",
+            "items": { "$ref": "#/components/schemas/ImportPlaybackPlan" }
+          }
+        }
+      },
+      "PlaybackReplay": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "回放执行方式。mode=configId 时使用 configId；mode=inline 时使用 options。",
+        "required": ["mode"],
+        "properties": {
+          "mode": { "type": "string", "enum": ["configId", "inline"] },
+          "configId": { "type": "string", "minLength": 1 },
+          "options": { "type": "object" }
+        }
+      },
+      "PlaybackStageReplay": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["segmentIndex", "replay"],
+        "properties": {
+          "segmentIndex": { "type": "integer", "minimum": 0 },
+          "replay": { "$ref": "#/components/schemas/PlaybackReplay" }
+        }
+      },
+      "PlaybackSelection": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["kind"],
+        "properties": {
+          "kind": { "type": "string", "minLength": 1 }
+        }
+      },
+      "PlaybackMatch": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["required"],
+        "properties": {
+          "required": { "type": "array", "items": {} }
+        }
+      },
+      "PlaybackScope": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "非空候选范围。recordIds 中每个 ID 只能引用目标记录组中的记录（大写 UUID）。缺少 scope 表示整个记录组。",
+        "required": ["recordIds"],
+        "properties": {
+          "recordIds": { "type": "array", "items": { "type": "string", "format": "uuid" }, "uniqueItems": true }
+        }
+      },
+      "PlaybackPlanBody": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "持久化 / Snapshot 形态的 plan 策略体，内嵌 schema 常量并携带服务端重写后的 target。",
+        "required": ["schema", "target", "match", "selection", "replay"],
+        "properties": {
+          "schema": { "const": "chr.playback-plan/v1" },
+          "target": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["libraryId", "recordGroupId"],
+            "properties": {
+              "libraryId": { "type": "string", "format": "uuid" },
+              "recordGroupId": { "type": "string", "format": "uuid" }
+            }
+          },
+          "match": { "$ref": "#/components/schemas/PlaybackMatch" },
+          "selection": { "$ref": "#/components/schemas/PlaybackSelection" },
+          "replay": { "$ref": "#/components/schemas/PlaybackReplay" },
+          "scope": { "$ref": "#/components/schemas/PlaybackScope" },
+          "stageReplays": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/PlaybackStageReplay" }
+          }
+        }
+      },
+      "PlaybackPlanBodyEditable": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "客户端可编辑的 plan 策略体（创建 / 更新 / 导入使用），内嵌 schema 常量但不含 target；target 由服务端根据 URL / 导入引用重写。",
+        "required": ["schema", "match", "selection", "replay"],
+        "properties": {
+          "schema": { "const": "chr.playback-plan/v1" },
+          "match": { "$ref": "#/components/schemas/PlaybackMatch" },
+          "selection": { "$ref": "#/components/schemas/PlaybackSelection" },
+          "replay": { "$ref": "#/components/schemas/PlaybackReplay" },
+          "scope": { "$ref": "#/components/schemas/PlaybackScope" },
+          "stageReplays": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/PlaybackStageReplay" }
+          }
+        }
+      },
+      "PlaybackPlan": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "Snapshot 中的回放方案持久化对象。默认方案与自定义方案共用此结构，仅 kind 不同。",
+        "required": ["planId", "kind", "name", "targetGroupId", "createdAt", "updatedAt", "revision", "createdByDeviceUDID", "plan"],
+        "properties": {
+          "planId": { "type": "string", "format": "uuid" },
+          "kind": { "type": "string", "enum": ["default", "custom"] },
+          "name": { "type": "string", "minLength": 1 },
+          "alias": { "type": "string", "description": "非空 alias 在同一记录组内大小写不敏感唯一；空 alias 服务端存为 NULL，不参与唯一约束。" },
+          "targetGroupId": { "type": "string", "format": "uuid" },
+          "createdAt": { "type": "integer", "minimum": 0, "description": "Unix Epoch 毫秒" },
+          "updatedAt": { "type": "integer", "minimum": 0, "description": "Unix Epoch 毫秒" },
+          "revision": { "type": "integer", "minimum": 1 },
+          "createdByDeviceUDID": { "type": "string", "minLength": 1 },
+          "plan": { "$ref": "#/components/schemas/PlaybackPlanBody" }
+        }
+      },
+      "ImportPlaybackPlan": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "创建网络库导入包中的方案项。每个记录组恰好一个 kind=default 方案，plan 不含 target/planId/createdByDeviceUDID/revision。targetGroupId 引用请求 Tree 的临时 node ID。",
+        "required": ["kind", "name", "alias", "targetGroupId", "plan"],
+        "properties": {
+          "kind": { "type": "string", "enum": ["default", "custom"] },
+          "name": { "type": "string", "minLength": 1 },
+          "alias": { "type": "string", "description": "空字符串表示未设置别名，服务端规范化为 NULL。" },
+          "targetGroupId": { "type": "string", "minLength": 1, "description": "请求 Tree 内的临时记录组 node ID；服务端重写为最终大写 UUID。" },
+          "plan": { "$ref": "#/components/schemas/PlaybackPlanBodyEditable" }
+        }
+      },
+      "CreatePlaybackPlanRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "创建 / 更新自定义回放方案请求。必须携带 kind=custom，不得携带 planId、createdByDeviceUDID、revision 或 target，任一存在返回 422 invalid_playback_plan。alias 字段必须存在，空字符串表示未设置别名。",
+        "required": ["schema", "kind", "name", "alias", "plan"],
+        "properties": {
+          "schema": { "const": "chr.network-playback-plan-create/v2" },
+          "kind": { "const": "custom" },
+          "name": { "type": "string", "minLength": 1 },
+          "alias": { "type": "string", "description": "空字符串表示未设置别名，服务端规范化为 NULL，不参与唯一约束。" },
+          "plan": { "$ref": "#/components/schemas/PlaybackPlanBodyEditable" }
+        }
+      },
+      "PlaybackPlanResult": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "方案创建 / 更新的写结果。删除方案返回 204 无响应体。",
+        "required": ["schema", "serverLibraryId", "planId", "revision", "planRevision", "changeToken"],
+        "properties": {
+          "schema": { "const": "chr.network-playback-plan-result/v2" },
+          "serverLibraryId": { "type": "string", "format": "uuid" },
+          "planId": { "type": "string", "format": "uuid" },
+          "revision": { "type": "integer", "minimum": 0, "description": "递增后的库 revision" },
+          "planRevision": { "type": "integer", "minimum": 1, "description": "方案自身 revision" },
+          "changeToken": { "type": "string", "minLength": 1 }
+        }
+      },
+      "ErrorDetail": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["code", "message", "requestId"],
+        "properties": {
+          "code": { "type": "string", "minLength": 1 },
+          "message": { "type": "string", "minLength": 1 },
+          "requestId": { "type": "string", "minLength": 1 }
+        }
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["error"],
+        "properties": {
+          "error": { "$ref": "#/components/schemas/ErrorDetail" }
+        }
+      }
+    }
+  }
+}
